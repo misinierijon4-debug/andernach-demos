@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nails by Nika - Manikuere, Gel-Naegel und Nageldesign</title>
+<style>
+  :root {
+    --ink: #2b2327;
+    --muted: #6d5f66;
+    --paper: #faf6f2;
+    --card: #ffffff;
+    --rose: #a8326a;
+    --rose-dark: #862855;
+    --gold: #b0892f;
+    --green: #2f6d55;
+    --green-dark: #245443;
+    --line: #e8ddd7;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+  }
+  img { display: block; max-width: 100%; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  section[id] { scroll-margin-top: 76px; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(250, 246, 242, 0.96);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 60px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .brand { font-weight: 800; font-size: 18px; color: var(--rose); white-space: nowrap; }
+  .demo-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--rose);
+    border: 1px solid var(--rose);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: 2px;
+    white-space: nowrap;
+  }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 12px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 8px;
+  }
+  .nav-links a:hover { background: #f0e5de; }
+
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: flex-end;
+    background: #000;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.88;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(30, 15, 24, 0.15) 0%, rgba(30, 15, 24, 0.74) 78%);
+  }
+  .hero .container { position: relative; z-index: 2; padding: 60px 20px 56px; width: 100%; }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(34px, 6vw, 58px);
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: 0;
+    max-width: 680px;
+  }
+  .hero p {
+    margin: 0 0 22px;
+    color: #f7eee9;
+    font-size: clamp(16px, 2.4vw, 20px);
+    max-width: 600px;
+  }
+  .hero .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn.primary { background: var(--rose); color: #fff; }
+  .btn.primary:hover { background: var(--rose-dark); }
+  .btn.ghost { border-color: rgba(255,255,255,.7); color: #fff; background: rgba(30,15,24,.25); }
+  .btn.ghost:hover { background: rgba(30,15,24,.45); }
+  .btn.green { background: var(--green); color: #fff; }
+  .btn.green:hover { background: var(--green-dark); }
+
+  section { padding: 64px 0; }
+  .sec-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 28px; letter-spacing: 0; }
+  .note { color: var(--muted); font-size: 15px; margin: 18px 0 0; }
+
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+  }
+  .card svg { color: var(--rose); margin-bottom: 12px; }
+  .card h3 { margin: 0 0 8px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .card .price-note {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--rose);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .gallery figure { margin: 0; position: relative; border-radius: 8px; overflow: hidden; }
+  .gallery img { width: 100%; height: 340px; object-fit: cover; }
+  .gallery figcaption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(30, 15, 24, 0.72);
+    color: #fff;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .hours { list-style: none; margin: 0; padding: 0; }
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .hours .day { font-weight: 600; }
+  .contact-list { margin: 0 0 18px; padding: 0; list-style: none; font-size: 15px; }
+  .contact-list li { padding: 6px 0; }
+  .map-wrap { margin-top: 32px; }
+  .map-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 340px;
+    border: 0;
+    border-radius: 8px;
+  }
+  .map-caption { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+
+  .quote-band {
+    background: var(--rose-dark);
+    color: #fff;
+    text-align: center;
+  }
+  .quote-band blockquote {
+    margin: 0 auto;
+    max-width: 720px;
+    font-size: clamp(18px, 3vw, 24px);
+    font-style: italic;
+  }
+  .quote-band cite { display: block; margin-top: 12px; font-style: normal; font-size: 14px; opacity: .85; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+  footer a { color: var(--muted); text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    .grid3 { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr; }
+    .gallery img { height: 260px; }
+    .split { grid-template-columns: 1fr; gap: 20px; }
+    .nav-links { gap: 0; }
+    .nav-links a { padding: 10px 8px; font-size: 13px; }
+  }
+  @media (max-width: 520px) {
+    .brand { font-size: 15px; }
+    .demo-pill { font-size: 9px; padding: 2px 6px; }
+    .nav-links a { padding: 8px 6px; font-size: 13px; }
+    section { padding: 44px 0; }
+    .map-wrap iframe { height: 280px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="brand">Nails by Nika <span class="demo-pill">Muster-Demo - kein realer Betrieb</span></div>
+    <div class="nav-links">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#termin">Termin</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" aria-label="Willkommen">
+  <img src="assets/hero.png" alt="Helles Studio von Nails by Nika mit Manikuere-Plaetzen">
+  <div class="container">
+    <h1>Schoene Naegel, die zu Ihnen passen</h1>
+    <p>Nails by Nika ist ein Muster-Studio fuer Manikuere, Gel-Naegel und Nageldesign in Andernach. Termine nach Vereinbarung - auch abends und samstags.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="https://wa.me/4926319876543?text=Hallo%20Nails%20by%20Nika%2C%20ich%20moechte%20gern%20einen%20Termin%20anfragen." target="_blank" rel="noopener">Termin per WhatsApp anfragen</a>
+      <a class="btn ghost" href="#leistungen">Leistungen ansehen</a>
+    </div>
+  </div>
+</section>
+
+<section id="leistungen">
+  <div class="container">
+    <p class="sec-label">Unsere Leistungen</p>
+    <h2>Vom Klassiker bis zum Design</h2>
+    <div class="grid3">
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a2 2 0 0 1 4 0v3"/><path d="M11 10V5a2 2 0 0 1 4 0v5"/><path d="M15 10V6a2 2 0 0 1 4 0v6c0 5-2.5 8-7 8s-6-2-6-5c0-2 1-3 2-4"/></svg>
+        <h3>Manikuere und Nagelpflege</h3>
+        <p>Nagelpflege, Form, Cuticula und Farblack - alles in einer entspannten Stunde.</p>
+        <span class="price-note">Preise auf Anfrage</span>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6l1 3H8l1-3z"/><path d="M8 7l1 12h6l1-12"/><path d="M10 11h4"/><path d="M10.5 15h3"/></svg>
+        <h3>Gel-Naegel</h3>
+        <p>Gel-Modellage in Wunschlaenge und Wunschform fuer natuerlich schoene Naegel.</p>
+        <span class="price-note">Preise auf Anfrage</span>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3L12 3z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/></svg>
+        <h3>Nageldesign</h3>
+        <p>Handbemalung, French, Glitzer und Verzierungen - ganz nach Ihrem Stil.</p>
+        <span class="price-note">Preise auf Anfrage</span>
+      </div>
+    </div>
+    <p class="note">Preise auf Anfrage: Nach einer kurzen Beratung erhalten Sie ein festes Angebot - transparent und ohne versteckte Kosten.</p>
+  </div>
+</section>
+
+<section id="termin" style="background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <p class="sec-label">Terminbuchung</p>
+    <h2>In drei Schritten zum Termin</h2>
+    <div class="grid3">
+      <div class="card">
+        <span class="step-num" aria-hidden="true">1</span>
+        <h3>Wunsch nennen</h3>
+        <p>Schreiben Sie uns per WhatsApp oder rufen Sie an - sobald Sie Zeit haben.</p>
+      </div>
+      <div class="card">
+        <span class="step-num" aria-hidden="true">2</span>
+        <h3>Zeit finden</h3>
+        <p>Wir schlagen Ihnen freie Termine vor - auch abends und samstags.</p>
+      </div>
+      <div class="card">
+        <span class="step-num" aria-hidden="true">3</span>
+        <h3>Bestaetigt</h3>
+        <p>Sie erhalten eine kurze Bestaetigung und sind herzlich willkommen.</p>
+      </div>
+    </div>
+    <p class="note"><a class="btn green" href="https://wa.me/4926319876543?text=Hallo%20Nails%20by%20Nika%2C%20ich%20moechte%20gern%20einen%20Termin%20anfragen." target="_blank" rel="noopener">Jetzt Termin anfragen</a></p>
+  </div>
+</section>
+
+<section id="galerie">
+  <div class="container">
+    <p class="sec-label">Ein Blick hinein</p>
+    <h2>So sieht es bei uns aus</h2>
+    <div class="gallery">
+      <figure><img src="assets/hero.png" alt="Manikuere-Plaetze mit bequemen Stuehlen im Studio"><figcaption>Unser Studio</figcaption></figure>
+      <figure><img src="assets/interior.png" alt="Fertiges Nageldesign in zartem Rosa mit Goldakzenten"><figcaption>Nageldesign aus dem Studio</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" style="background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <div class="split">
+      <div>
+        <p class="sec-label">Oeffnungszeiten</p>
+        <h2>Wann Sie uns finden</h2>
+        <ul class="hours">
+          <li><span class="day">Dienstag - Freitag</span><span>9:00 - 18:00</span></li>
+          <li><span class="day">Samstag</span><span>9:00 - 14:00</span></li>
+          <li><span class="day">Sonntag / Montag</span><span>Geschlossen</span></li>
+        </ul>
+        <p class="note">Termine ausserhalb der Oeffnungszeiten nach Vereinbarung.</p>
+      </div>
+      <div>
+        <p class="sec-label">Kontakt</p>
+        <h2>So erreichen Sie uns</h2>
+        <ul class="contact-list">
+          <li>Nails by Nika, Musterweg 12, 56626 Andernach (Muster-Adresse)</li>
+          <li>Telefon: 02631-9876543</li>
+          <li>E-Mail: hallo@nails-by-nika.example</li>
+        </ul>
+        <a class="btn green" href="https://wa.me/4926319876543?text=Hallo%20Nails%20by%20Nika%2C%20ich%20moechte%20gern%20einen%20Termin%20anfragen." target="_blank" rel="noopener">WhatsApp-Chat oeffnen</a>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=7.36%2C50.42%2C7.44%2C50.46&amp;layer=mapnik&amp;marker=50.4396%2C7.4014" title="Karte zur Orientierung in Andernach" loading="lazy"></iframe>
+      <p class="map-caption">Karte zur Orientierung - die Adresse in dieser Muster-Demo ist erfunden.</p>
+    </div>
+  </div>
+</section>
+
+<section class="quote-band" aria-label="Zitat">
+  <div class="container">
+    <blockquote>"Endlich ein Studio, in dem man sich wohlfuehlt. Die Gel-Naegel halten wochenlang und sehen aus wie frisch aus dem Urlaub."</blockquote>
+    <cite>- Julia Neumann, Kundin seit 2023</cite>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>Nails by Nika - Musterweg 12, 56626 Andernach - 02631-9876543</div>
+    <div><a href="#">Impressum</a> / <a href="#">Datenschutz</a> (Texte werden mitgeliefert)</div>
+    <div style="font-size:12px;opacity:.65;margin-top:4px">Muster-Demo - kein realer Betrieb. Erstellt mit dem Website-Paket von Erijon (149 EUR einmalig).</div>
+    <div style="font-size:12px;opacity:.65">Projektanfrage: <a href="mailto:misinierijon4@gmail.com">misinierijon4@gmail.com</a> oder 0178 3551225</div>
+  </div>
+</footer>
+</body>
+</html>

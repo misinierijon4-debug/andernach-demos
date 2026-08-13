@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Balance Kosmetik - Kosmetik, Wimpern und Make-up in Andernach</title>
+<style>
+  :root {
+    --ink: #2b2327;
+    --muted: #6d5f66;
+    --paper: #faf5f2;
+    --card: #ffffff;
+    --rose: #a03d5c;
+    --rose-dark: #85304c;
+    --gold: #c08a3e;
+    --line: #e9ddd7;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+  }
+  img { display: block; max-width: 100%; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(250, 245, 242, 0.97);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 60px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .brand { font-weight: 800; font-size: 18px; color: var(--rose); white-space: nowrap; }
+  .demo-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--rose);
+    border: 1px solid var(--rose);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: 2px;
+    white-space: nowrap;
+  }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 12px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 8px;
+  }
+  .nav-links a:hover { background: #f1e7e1; }
+
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: flex-end;
+    background: #000;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(30, 22, 26, 0.2) 0%, rgba(30, 22, 26, 0.78) 80%);
+  }
+  .hero .container { position: relative; z-index: 2; padding: 60px 20px 56px; width: 100%; }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(34px, 6vw, 58px);
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: 0;
+    max-width: 680px;
+  }
+  .hero p {
+    margin: 0 0 22px;
+    color: #f7efe4;
+    font-size: clamp(16px, 2.4vw, 20px);
+    max-width: 560px;
+  }
+  .hero .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn.primary { background: var(--rose); color: #fff; }
+  .btn.primary:hover { background: var(--rose-dark); }
+  .btn.ghost { border-color: rgba(255,255,255,.75); color: #fff; background: rgba(30,22,26,.25); }
+  .btn.ghost:hover { background: rgba(30,22,26,.45); }
+  .btn.gold { background: var(--gold); color: #2a211c; }
+  .btn.gold:hover { background: #ab7830; }
+
+  section { padding: 64px 0; scroll-margin-top: 72px; }
+  .sec-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 28px; letter-spacing: 0; }
+
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+  }
+  .card svg { color: var(--rose); margin-bottom: 12px; }
+  .card h3 { margin: 0 0 8px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .price-wrap {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  table.price {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  table.price th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--line);
+  }
+  table.price td {
+    padding: 11px 12px;
+    border-bottom: 1px dotted var(--line);
+  }
+  table.price td:last-child {
+    color: var(--rose);
+    font-weight: 700;
+    white-space: nowrap;
+    text-align: right;
+    width: 130px;
+  }
+  .price-note { margin: 14px 0 0; color: var(--muted); font-size: 13px; }
+
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .gallery figure { margin: 0; position: relative; border-radius: 8px; overflow: hidden; }
+  .gallery img { width: 100%; height: 340px; object-fit: cover; }
+  .gallery figcaption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(30, 22, 26, 0.74);
+    color: #fff;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .hours { list-style: none; margin: 0; padding: 0; }
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .hours .day { font-weight: 600; }
+  .contact-list { margin: 0 0 18px; padding: 0; list-style: none; font-size: 15px; }
+  .contact-list li { padding: 6px 0; }
+  .steps { margin: 0 0 8px; padding: 0; list-style: none; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 6px 0 6px 44px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--rose);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .map-wrap {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .map-wrap iframe { display: block; width: 100%; height: 380px; border: 0; }
+  .map-link { font-size: 14px; }
+  .map-link a { color: var(--rose); }
+
+  .quote-band { background: var(--rose); color: #fff; text-align: center; }
+  .quote-band blockquote {
+    margin: 0 auto;
+    max-width: 720px;
+    font-size: clamp(18px, 3vw, 24px);
+    font-style: italic;
+  }
+  .quote-band cite { display: block; margin-top: 12px; font-style: normal; font-size: 14px; opacity: .85; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 13px; color: var(--muted); }
+  footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+  footer a { color: var(--muted); text-decoration: underline; }
+
+  @media (max-width: 960px) {
+    .grid4 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 860px) {
+    .gallery { grid-template-columns: 1fr; }
+    .gallery img { height: 260px; }
+    .split { grid-template-columns: 1fr; gap: 20px; }
+    .map-wrap iframe { height: 300px; }
+  }
+  @media (max-width: 520px) {
+    .grid4 { grid-template-columns: 1fr; }
+    .nav-links a { padding: 8px 6px; font-size: 13px; }
+    .price-wrap { padding: 18px; }
+    table.price { font-size: 14px; }
+    table.price td { padding: 10px 8px; }
+    table.price td:last-child { white-space: normal; width: auto; }
+    .map-wrap iframe { height: 260px; }
+    section { padding: 44px 0; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="brand">Beauty Balance Kosmetik <span class="demo-pill">Muster-Demo</span></div>
+    <div class="nav-links">
+      <a href="#behandlungen">Behandlungen</a>
+      <a href="#preise">Preise</a>
+      <a href="#galerie">Bilder</a>
+      <a href="#zeiten">Zeiten</a>
+      <a href="#termin">Termin</a>
+      <a href="#anfahrt">Anfahrt</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" aria-label="Willkommen">
+  <img src="assets/hero.png" alt="Behandlungszimmer von Beauty Balance Kosmetik">
+  <div class="container">
+    <h1>Kosmetik, Wimpern und Make-up - Termin per WhatsApp</h1>
+    <p>Gesichtsbehandlungen, Wimpernverlaengerung und Make-up mit Ruhe und Zeit. Termin einfach per WhatsApp anfragen - kein Anruf, kein Warten.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="https://wa.me/491512345678?text=Hallo%20Beauty%20Balance%2C%20ich%20moechte%20einen%20Termin%20anfragen." target="_blank" rel="noopener">Termin per WhatsApp</a>
+      <a class="btn ghost" href="#preise">Preise ansehen</a>
+    </div>
+  </div>
+</section>
+
+<section id="behandlungen">
+  <div class="container">
+    <p class="sec-label">Unsere Behandlungen</p>
+    <h2>Alles fuer schoene Haut und einen frischen Blick</h2>
+    <div class="grid4">
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M9 11h.01"/><path d="M15 11h.01"/><path d="M9.5 15.5c1 1 4 1 5 0"/><path d="M12 3v2"/></svg>
+        <h3>Gesichtsbehandlung</h3>
+        <p>Reinigung, Peeling, Maske und Massage - abgestimmt auf Ihren Hauttyp.</p>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg>
+        <h3>Wimpern</h3>
+        <p>Wimpernverlaengerung, Wimpernlifting und Faerben fuer einen wachen Blick.</p>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4l5 5-9 9-5-5 9-9z"/><path d="M4 21h7"/><path d="M16 10l-2-2"/></svg>
+        <h3>Make-up</h3>
+        <p>Tages-, Abend- und Brautmake-up - dezent oder glamouroes.</p>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8c2.5-1.5 5-1.5 7.5 0"/><path d="M13.5 8c2.5-1.5 5-1.5 7.5 0"/><path d="M5 17c1.5 1 3 1.5 4.5 1.5"/><path d="M14.5 18.5c1.5 0 3-.5 4.5-1.5"/></svg>
+        <h3>Augenbrauen</h3>
+        <p>Formen, Faerben und Auffuellen fuer einen klaren Rahmen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="preise" style="background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <p class="sec-label">Preisliste</p>
+    <h2>Faire Preise, die man kennt</h2>
+    <div class="price-wrap">
+      <table class="price">
+        <thead>
+          <tr><th>Behandlung</th><th>Preis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Klassische Gesichtsbehandlung</td><td>ab 49 EUR</td></tr>
+          <tr><td>Reinigung mit Peeling</td><td>39 EUR</td></tr>
+          <tr><td>Feuchtigkeitsmaske</td><td>29 EUR</td></tr>
+          <tr><td>Wimpernverlaengerung (Neufuellung)</td><td>ab 89 EUR</td></tr>
+          <tr><td>Wimpernverlaengerung (Auffuellen)</td><td>ab 45 EUR</td></tr>
+          <tr><td>Wimpernlifting</td><td>49 EUR</td></tr>
+          <tr><td>Tagesmake-up</td><td>35 EUR</td></tr>
+          <tr><td>Abend- / Brautmake-up</td><td>ab 49 EUR</td></tr>
+          <tr><td>Augenbrauen formen und faerben</td><td>22 EUR</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">Alle Preise sind Richtwerte. Der genaue Preis haengt von der Behandlung ab - fragen Sie unverbindlich per WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<section id="galerie">
+  <div class="container">
+    <p class="sec-label">Ein Blick hinein</p>
+    <h2>So sieht es bei uns aus</h2>
+    <div class="gallery">
+      <figure><img src="assets/interior.png" alt="Empfang mit Beratungsecke"><figcaption>Unser Empfang</figcaption></figure>
+      <figure><img src="assets/hero.png" alt="Behandlungszimmer mit Liege"><figcaption>Das Behandlungszimmer</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="zeiten">
+  <div class="container">
+    <p class="sec-label">Vor Ort</p>
+    <h2>Oeffnungszeiten</h2>
+    <ul class="hours">
+      <li><span class="day">Dienstag - Freitag</span><span>9:00 - 18:00</span></li>
+      <li><span class="day">Samstag</span><span>9:00 - 14:00</span></li>
+      <li><span class="day">Sonntag / Montag</span><span>Ruhetag</span></li>
+    </ul>
+    <p style="color: var(--muted); font-size: 14px;">Termine sind auch ausserhalb der Oeffnungszeiten nach Absprache moeglich.</p>
+  </div>
+</section>
+
+<section id="termin" style="background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container split">
+    <div>
+      <p class="sec-label">Terminbuchung</p>
+      <h2>In 3 Schritten zum Termin</h2>
+      <ol class="steps">
+        <li>WhatsApp schreiben oder anrufen - Behandlungen und Wuensche kurz nennen.</li>
+        <li>Terminwunsch bestaetigen lassen - Antwort kommt in der Regel am selben Tag.</li>
+        <li>Entspannt vorbeikommen und sich verwoehnen lassen.</li>
+      </ol>
+    </div>
+    <div>
+      <p class="sec-label">Kontakt</p>
+      <h2>So erreichen Sie uns</h2>
+      <ul class="contact-list">
+        <li>Beauty Balance Kosmetik, Beethovenstrasse 12, 56626 Andernach</li>
+        <li>Telefon: 02631-9012345</li>
+        <li>WhatsApp: 0151-2345678</li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn primary" href="https://wa.me/491512345678?text=Hallo%20Beauty%20Balance%2C%20ich%20moechte%20einen%20Termin%20anfragen." target="_blank" rel="noopener">Jetzt per WhatsApp anfragen</a>
+        <a class="btn gold" href="tel:+4926319012345">Anrufen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="anfahrt" style="background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <p class="sec-label">Anfahrt</p>
+    <h2>So finden Sie uns</h2>
+    <div class="map-wrap">
+      <iframe title="Karte mit dem Standort des Kosmetikstudios" src="https://www.openstreetmap.org/export/embed.html?bbox=7.3922%2C50.4326%2C7.4122%2C50.4426&amp;layer=mapnik&amp;marker=50.4376%2C7.4022" loading="lazy"></iframe>
+    </div>
+    <p class="map-link">Beauty Balance Kosmetik, Beethovenstrasse 12, 56626 Andernach - <a href="https://www.openstreetmap.org/?mlat=50.4376&amp;mlon=7.4022#map=16/50.4376/7.4022" target="_blank" rel="noopener">Route auf OpenStreetMap planen</a></p>
+  </div>
+</section>
+
+<section class="quote-band" aria-label="Zitat">
+  <div class="container">
+    <blockquote>"Endlich ein Studio, in dem man sich Zeit nimmt. Die Wimpern halten wochenlang, und der Termin war per WhatsApp in zwei Minuten gemacht."</blockquote>
+    <cite>- Julia Weber, Kundin aus Andernach</cite>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="container">
+    <div>Beauty Balance Kosmetik - Beethovenstrasse 12, 56626 Andernach - 02631-9012345</div>
+    <div><a href="#">Impressum</a> / <a href="#">Datenschutz</a> (Texte werden mitgeliefert)</div>
+    <div style="font-size:12px;opacity:.65;margin-top:4px">Muster-Demo - kein realer Betrieb. Erstellt mit dem Website-Paket von Erijon (149 EUR einmalig).</div>
+    <div style="font-size:12px;opacity:.65">Projektanfrage: <a href="mailto:misinierijon4@gmail.com">misinierijon4@gmail.com</a> oder 0178 3551225</div>
+  </div>
+</footer>
+</body>
+</html>

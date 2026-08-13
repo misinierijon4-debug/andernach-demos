@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ristorante Amici - Italienische Kueche in Andernach</title>
+<style>
+  :root {
+    --ink: #2a211c;
+    --muted: #6d5d52;
+    --paper: #faf5ee;
+    --card: #ffffff;
+    --red: #9c3328;
+    --red-dark: #7c261d;
+    --gold: #c99a3d;
+    --line: #e7dccb;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+  }
+  img { display: block; max-width: 100%; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(250, 245, 238, 0.97);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 60px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .brand { font-weight: 800; font-size: 18px; color: var(--red); white-space: nowrap; }
+  .demo-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    border: 1px solid var(--red);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: 2px;
+    white-space: nowrap;
+  }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 12px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 8px;
+  }
+  .nav-links a:hover { background: #f0e6d8; }
+
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: flex-end;
+    background: #000;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(25,18,12,0.2) 0%, rgba(25,18,12,0.78) 80%);
+  }
+  .hero .container { position: relative; z-index: 2; padding: 60px 20px 56px; width: 100%; }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(34px, 6vw, 58px);
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: 0;
+    max-width: 640px;
+  }
+  .hero p {
+    margin: 0 0 22px;
+    color: #f7efe4;
+    font-size: clamp(16px, 2.4vw, 20px);
+    max-width: 560px;
+  }
+  .hero .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn.primary { background: var(--red); color: #fff; }
+  .btn.primary:hover { background: var(--red-dark); }
+  .btn.ghost { border-color: rgba(255,255,255,.75); color: #fff; background: rgba(25,18,12,.25); }
+  .btn.ghost:hover { background: rgba(25,18,12,.45); }
+  .btn.gold { background: var(--gold); color: #2a211c; }
+  .btn.gold:hover { background: #b8892d; }
+
+  section { padding: 64px 0; }
+  .sec-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 28px; letter-spacing: 0; }
+
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+  }
+  .card svg { color: var(--red); margin-bottom: 12px; }
+  .card h3 { margin: 0 0 8px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 40px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--line);
+    font-size: 15px;
+  }
+  .menu-item .name { font-weight: 600; }
+  .menu-item .price { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .gallery figure { margin: 0; position: relative; border-radius: 8px; overflow: hidden; }
+  .gallery img { width: 100%; height: 340px; object-fit: cover; }
+  .gallery figcaption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(25, 18, 12, 0.74);
+    color: #fff;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .hours { list-style: none; margin: 0; padding: 0; }
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .hours .day { font-weight: 600; }
+  .contact-list { margin: 0 0 18px; padding: 0; list-style: none; font-size: 15px; }
+  .contact-list li { padding: 6px 0; }
+
+  .quote-band { background: var(--red); color: #fff; text-align: center; }
+  .quote-band blockquote {
+    margin: 0 auto;
+    max-width: 720px;
+    font-size: clamp(18px, 3vw, 24px);
+    font-style: italic;
+  }
+  .quote-band cite { display: block; margin-top: 12px; font-style: normal; font-size: 14px; opacity: .85; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 13px; color: var(--muted); }
+  footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+  footer a { color: var(--muted); text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    .grid3 { grid-template-columns: 1fr; }
+    .menu { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr; }
+    .gallery img { height: 260px; }
+    .split { grid-template-columns: 1fr; gap: 20px; }
+  }
+  @media (max-width: 520px) {
+    .nav-links a { padding: 8px 6px; }
+    section { padding: 44px 0; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="brand">Ristorante Amici <span class="demo-pill">Muster-Demo</span></div>
+    <div class="nav-links">
+      <a href="#karte">Speisekarte</a>
+      <a href="#galerie">Bilder</a>
+      <a href="#zeiten">Oeffnungszeiten</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" aria-label="Willkommen">
+  <img src="assets/hero.png" alt="Aussenansicht des Ristorante Amici">
+  <div class="container">
+    <h1>Italienische Kueche mit Herz - mitten in Andernach</h1>
+    <p>Frische Pasta, hausgemachte Saucen und ein Glas Wein vom Fass. Reservieren Sie in 30 Sekunden per WhatsApp - ganz ohne Anruf.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="https://wa.me/4926319876543?text=Hallo%20Ristorante%20Amici%2C%20ich%20moechte%20einen%20Tisch%20reservieren." target="_blank" rel="noopener">Tisch reservieren</a>
+      <a class="btn ghost" href="#karte">Speisekarte ansehen</a>
+    </div>
+  </div>
+</section>
+
+<section id="karte">
+  <div class="container">
+    <p class="sec-label">Aus der Kueche</p>
+    <h2>Speisekarte - immer aktuell online</h2>
+    <div class="menu">
+      <div class="menu-item"><span class="name">Bruschetta al pomodoro</span><span class="price">6,50 EUR</span></div>
+      <div class="menu-item"><span class="name">Olive ascolane</span><span class="price">7,00 EUR</span></div>
+      <div class="menu-item"><span class="name">Spaghetti carbonara</span><span class="price">11,50 EUR</span></div>
+      <div class="menu-item"><span class="name">Gnocchi del giorno</span><span class="price">12,00 EUR</span></div>
+      <div class="menu-item"><span class="name">Pizza Margherita</span><span class="price">9,50 EUR</span></div>
+      <div class="menu-item"><span class="name">Saltimbocca alla romana</span><span class="price">16,90 EUR</span></div>
+      <div class="menu-item"><span class="name">Tiramisu della casa</span><span class="price">5,50 EUR</span></div>
+      <div class="menu-item"><span class="name">Hauswein (0,2 l)</span><span class="price">4,20 EUR</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie" style="background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <p class="sec-label">Ein Blick hinein</p>
+    <h2>So sieht es bei uns aus</h2>
+    <div class="gallery">
+      <figure><img src="assets/interior.png" alt="Speiseraum mit Backsteinwand"><figcaption>Unser Speiseraum</figcaption></figure>
+      <figure><img src="assets/hero.png" alt="Aussenbereich mit Lichterkette"><figcaption>Draussen am Abend</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="zeiten">
+  <div class="container split">
+    <div>
+      <p class="sec-label">Vor Ort</p>
+      <h2>Oeffnungszeiten</h2>
+      <ul class="hours">
+        <li><span class="day">Dienstag - Freitag</span><span>11:30 - 14:30 &amp; 17:30 - 22:00</span></li>
+        <li><span class="day">Samstag</span><span>17:30 - 23:00</span></li>
+        <li><span class="day">Sonntag</span><span>12:00 - 21:00</span></li>
+        <li><span class="day">Montag</span><span>Ruhetag</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sec-label">Kontakt</p>
+      <h2>Reservierung in 30 Sekunden</h2>
+      <ul class="contact-list">
+        <li>Ristorante Amici, Schlossstrasse 18, 56626 Andernach</li>
+        <li>Telefon: 02631-9876543</li>
+        <li>E-Mail: hallo@ristorante-amici.example</li>
+      </ul>
+      <a class="btn gold" href="https://wa.me/4926319876543?text=Hallo%20Ristorante%20Amici%2C%20ich%20moechte%20einen%20Tisch%20reservieren." target="_blank" rel="noopener">Jetzt per WhatsApp reservieren</a>
+    </div>
+  </div>
+</section>
+
+<section class="quote-band" aria-label="Zitat">
+  <div class="container">
+    <blockquote>"Die beste Carbonara in der Stadt - und man reserviert einfach per WhatsApp. Geht nichts drueber."</blockquote>
+    <cite>- Juergen Weber, Stammgast</cite>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="container">
+    <div>Ristorante Amici - Schlossstrasse 18, 56626 Andernach - 02631-9876543</div>
+    <div><a href="#">Impressum</a> / <a href="#">Datenschutz</a> (Texte werden mitgeliefert)</div>
+    <div style="font-size:12px;opacity:.65;margin-top:4px">Muster-Demo - kein realer Betrieb. Erstellt mit dem Website-Paket von Erijon (149 EUR einmalig).</div>
+    <div style="font-size:12px;opacity:.65">Projektanfrage: <a href="mailto:misinierijon4@gmail.com">misinierijon4@gmail.com</a> oder 0178 3551225</div>
+  </div>
+</footer>
+</body>
+</html>

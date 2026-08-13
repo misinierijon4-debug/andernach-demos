@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haarwerk Andernach - Ihr Friseur in Andernach</title>
+<style>
+  :root {
+    --ink: #26221f;
+    --muted: #6b6259;
+    --paper: #faf6f0;
+    --card: #ffffff;
+    --berry: #8a3d5a;
+    --berry-dark: #6f2f47;
+    --gold: #c08a3e;
+    --line: #e6ddd2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+  }
+  img { display: block; max-width: 100%; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(250, 246, 240, 0.97);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 60px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .brand { font-weight: 800; font-size: 18px; color: var(--berry); white-space: nowrap; }
+  .demo-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--berry);
+    border: 1px solid var(--berry);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: 2px;
+    white-space: nowrap;
+  }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 12px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 8px;
+  }
+  .nav-links a:hover { background: #f0e7dc; }
+
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: flex-end;
+    background: #000;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(30, 22, 20, 0.2) 0%, rgba(30, 22, 20, 0.78) 80%);
+  }
+  .hero .container { position: relative; z-index: 2; padding: 60px 20px 56px; width: 100%; }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(34px, 6vw, 58px);
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: 0;
+    max-width: 680px;
+  }
+  .hero p {
+    margin: 0 0 22px;
+    color: #f7efe4;
+    font-size: clamp(16px, 2.4vw, 20px);
+    max-width: 560px;
+  }
+  .hero .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn.primary { background: var(--berry); color: #fff; }
+  .btn.primary:hover { background: var(--berry-dark); }
+  .btn.ghost { border-color: rgba(255,255,255,.75); color: #fff; background: rgba(30,22,20,.25); }
+  .btn.ghost:hover { background: rgba(30,22,20,.45); }
+  .btn.gold { background: var(--gold); color: #2a211c; }
+  .btn.gold:hover { background: #ab7830; }
+
+  section { padding: 64px 0; }
+  .sec-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--berry);
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 28px; letter-spacing: 0; }
+
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+  }
+  .card svg { color: var(--berry); margin-bottom: 12px; }
+  .card h3 { margin: 0 0 8px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .price-wrap {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  table.price {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  table.price th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--line);
+  }
+  table.price td {
+    padding: 11px 12px;
+    border-bottom: 1px dotted var(--line);
+  }
+  table.price td:last-child {
+    color: var(--berry);
+    font-weight: 700;
+    white-space: nowrap;
+    text-align: right;
+    width: 130px;
+  }
+  .price-note { margin: 14px 0 0; color: var(--muted); font-size: 13px; }
+
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .gallery figure { margin: 0; position: relative; border-radius: 8px; overflow: hidden; }
+  .gallery img { width: 100%; height: 340px; object-fit: cover; }
+  .gallery figcaption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(30, 22, 20, 0.74);
+    color: #fff;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .hours { list-style: none; margin: 0; padding: 0; }
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .hours .day { font-weight: 600; }
+  .contact-list { margin: 0 0 18px; padding: 0; list-style: none; font-size: 15px; }
+  .contact-list li { padding: 6px 0; }
+
+  .quote-band { background: var(--berry); color: #fff; text-align: center; }
+  .quote-band blockquote {
+    margin: 0 auto;
+    max-width: 720px;
+    font-size: clamp(18px, 3vw, 24px);
+    font-style: italic;
+  }
+  .quote-band cite { display: block; margin-top: 12px; font-style: normal; font-size: 14px; opacity: .85; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 13px; color: var(--muted); }
+  footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+  footer a { color: var(--muted); text-decoration: underline; }
+
+  @media (max-width: 960px) {
+    .grid4 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 860px) {
+    .gallery { grid-template-columns: 1fr; }
+    .gallery img { height: 260px; }
+    .split { grid-template-columns: 1fr; gap: 20px; }
+  }
+  @media (max-width: 520px) {
+    .grid4 { grid-template-columns: 1fr; }
+    .nav-links a { padding: 8px 6px; font-size: 13px; }
+    .price-wrap { padding: 18px; }
+    table.price td { padding: 10px 8px; }
+    section { padding: 44px 0; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="brand">Haarwerk Andernach <span class="demo-pill">Muster-Demo</span></div>
+    <div class="nav-links">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#preise">Preise</a>
+      <a href="#galerie">Bilder</a>
+      <a href="#zeiten">Zeiten</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" aria-label="Willkommen">
+  <img src="assets/hero.png" alt="Aussenansicht von Haarwerk Andernach">
+  <div class="container">
+    <h1>Ihr Friseur in Andernach - Termin in 2 Minuten per WhatsApp</h1>
+    <p>Haarschnitt, Faerben und Styling mit Ruhe und Zeit. Termin einfach per WhatsApp anfragen - kein Anruf, kein Warten in der Schlange.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="https://wa.me/4926316789012?text=Hallo%20Haarwerk%2C%20ich%20moechte%20einen%20Termin%20anfragen." target="_blank" rel="noopener">Termin per WhatsApp</a>
+      <a class="btn ghost" href="#preise">Preise ansehen</a>
+    </div>
+  </div>
+</section>
+
+<section id="leistungen">
+  <div class="container">
+    <p class="sec-label">Unsere Leistungen</p>
+    <h2>Alles fuer gutes Haar - unter einem Dach</h2>
+    <div class="grid4">
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l-3 9H9L6 3z"/><path d="M12 12v6"/><path d="M9 21h6"/><path d="M7 18h10"/></svg>
+        <h3>Haarschnitt</h3>
+        <p>Klassisch oder modern - Schnitt, Waschen und Styling inklusive.</p>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-4 0-7 2-7 5 0 1.5 1 3 2.5 4L6 19c-.2 1 .6 2 1.7 2h8.6c1.1 0 1.9-1 1.7-2l-1.5-7C18 11 19 9.5 19 8c0-3-3-5-7-5z"/><path d="M12 3v18"/></svg>
+        <h3>Faerben</h3>
+        <p>Straehnen, Balayage und Komplettfaerbung mit schonenden Produkten.</p>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16"/><path d="M5 21V10h14v11"/><path d="M8 10c0-2 1-3 4-3s4 1 4 3"/><path d="M12 7V4"/><path d="M10 4h4"/></svg>
+        <h3>Styling</h3>
+        <p>Frisuren fuer den Alltag, Feste oder das grosse Business-Meeting.</p>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="M12 6c3 0 5 2 5 5v4l2 2H5l2-2v-4c0-3 2-5 5-5z"/><path d="M9 20c0 1 1 2 3 2s3-1 3-2"/></svg>
+        <h3>Hochzeitsfrisuren</h3>
+        <p>Brautfrisuren und Styling fuer die ganze Hochzeitsgesellschaft.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="preise" style="background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <p class="sec-label">Preisliste</p>
+    <h2>Faire Preise, die man kennt</h2>
+    <div class="price-wrap">
+      <table class="price">
+        <thead>
+          <tr><th>Leistung</th><th>Preis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Herrenhaarschnitt</td><td>22 EUR</td></tr>
+          <tr><td>Kinderhaarschnitt (bis 12 Jahre)</td><td>16 EUR</td></tr>
+          <tr><td>Damenhaarschnitt</td><td>ab 38 EUR</td></tr>
+          <tr><td>Faerben (Komplettfaerbung)</td><td>ab 55 EUR</td></tr>
+          <tr><td>Styling / Festfrisur</td><td>ab 25 EUR</td></tr>
+          <tr><td>Hochzeitsfrisur inkl. Probe</td><td>ab 79 EUR</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">Alle Preise inklusive Waschen und Foehnen. Genauer Preis nach kurzer Beratung - unverbindlich per WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<section id="galerie">
+  <div class="container">
+    <p class="sec-label">Ein Blick hinein</p>
+    <h2>So sieht es bei uns aus</h2>
+    <div class="gallery">
+      <figure><img src="assets/interior.png" alt="Styling-Plaetze mit Spiegeln"><figcaption>Unsere Styling-Plaetze</figcaption></figure>
+      <figure><img src="assets/hero.png" alt="Aussenansicht in der Hermannstrasse"><figcaption>Das Salon in der Hermannstrasse</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="zeiten">
+  <div class="container split">
+    <div>
+      <p class="sec-label">Vor Ort</p>
+      <h2>Oeffnungszeiten</h2>
+      <ul class="hours">
+        <li><span class="day">Dienstag - Freitag</span><span>9:00 - 18:00</span></li>
+        <li><span class="day">Samstag</span><span>8:00 - 14:00</span></li>
+        <li><span class="day">Sonntag / Montag</span><span>Ruhetag</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sec-label">Kontakt</p>
+      <h2>Termin in 2 Minuten</h2>
+      <ul class="contact-list">
+        <li>Haarwerk Andernach, Hermannstrasse 8, 56626 Andernach</li>
+        <li>Telefon: 02631-6789012</li>
+        <li>WhatsApp: 02631-6789012</li>
+      </ul>
+      <a class="btn gold" href="https://wa.me/4926316789012?text=Hallo%20Haarwerk%2C%20ich%20moechte%20einen%20Termin%20anfragen." target="_blank" rel="noopener">Jetzt per WhatsApp anfragen</a>
+    </div>
+  </div>
+</section>
+
+<section class="quote-band" aria-label="Zitat">
+  <div class="container">
+    <blockquote>"Endlich ein Salon, in dem man sich Zeit nimmt. Mein neuer Schnitt haelt seit Wochen - und der Termin war per WhatsApp in einer Minute gemacht."</blockquote>
+    <cite>- Sabine Krueger, Stammkundin aus Andernach</cite>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="container">
+    <div>Haarwerk Andernach - Hermannstrasse 8, 56626 Andernach - 02631-6789012</div>
+    <div><a href="#">Impressum</a> / <a href="#">Datenschutz</a> (Texte werden mitgeliefert)</div>
+    <div style="font-size:12px;opacity:.65;margin-top:4px">Muster-Demo - kein realer Betrieb. Erstellt mit dem Website-Paket von Erijon (149 EUR einmalig).</div>
+    <div style="font-size:12px;opacity:.65">Projektanfrage: <a href="mailto:misinierijon4@gmail.com">misinierijon4@gmail.com</a> oder 0178 3551225</div>
+  </div>
+</footer>
+</body>
+</html>

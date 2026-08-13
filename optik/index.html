@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optik Blickpunkt - Muster-Demo | Ihre Augen im Fokus</title>
+<style>
+  :root {
+    --ink: #1f2a33;
+    --muted: #5c6a74;
+    --paper: #f6f7f4;
+    --card: #ffffff;
+    --teal: #1f6f78;
+    --teal-dark: #175761;
+    --gold: #b48a3c;
+    --line: #dfe4e2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+  }
+  img { display: block; max-width: 100%; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(246, 247, 244, 0.97);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 60px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .brand { font-weight: 800; font-size: 18px; color: var(--teal); white-space: nowrap; }
+  .demo-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: 2px;
+    white-space: nowrap;
+  }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 12px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 8px;
+  }
+  .nav-links a:hover { background: #e8ece9; }
+
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: flex-end;
+    background: #000;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(18, 28, 33, 0.18) 0%, rgba(18, 28, 33, 0.78) 80%);
+  }
+  .hero .container { position: relative; z-index: 2; padding: 60px 20px 56px; width: 100%; }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(34px, 6vw, 58px);
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: 0;
+    max-width: 680px;
+  }
+  .hero p {
+    margin: 0 0 22px;
+    color: #f1f4f1;
+    font-size: clamp(16px, 2.4vw, 20px);
+    max-width: 560px;
+  }
+  .hero .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn.primary { background: var(--gold); color: #fff; }
+  .btn.primary:hover { background: #94703a; }
+  .btn.ghost { border-color: rgba(255,255,255,.7); color: #fff; background: rgba(18,28,33,.25); }
+  .btn.ghost:hover { background: rgba(18,28,33,.45); }
+  .btn.teal { background: var(--teal); color: #fff; }
+  .btn.teal:hover { background: var(--teal-dark); }
+
+  section { padding: 64px 0; }
+  .sec-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 28px; letter-spacing: 0; }
+
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+  }
+  .card svg { color: var(--teal); margin-bottom: 12px; }
+  .card h3 { margin: 0 0 8px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .gallery figure { margin: 0; position: relative; border-radius: 8px; overflow: hidden; }
+  .gallery img { width: 100%; height: 340px; object-fit: cover; }
+  .gallery figcaption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(18, 28, 33, 0.74);
+    color: #fff;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .hours { list-style: none; margin: 0; padding: 0; }
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .hours .day { font-weight: 600; }
+  .contact-list { margin: 0 0 18px; padding: 0; list-style: none; font-size: 15px; }
+  .contact-list li { padding: 6px 0; }
+
+  .map-box {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #eef1ee;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .map-box strong { display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
+
+  .quote-band {
+    background: var(--teal);
+    color: #fff;
+    text-align: center;
+  }
+  .quote-band blockquote {
+    margin: 0 auto;
+    max-width: 720px;
+    font-size: clamp(18px, 3vw, 24px);
+    font-style: italic;
+  }
+  .quote-band cite { display: block; margin-top: 12px; font-style: normal; font-size: 14px; opacity: .85; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+  footer a { color: var(--muted); text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    .grid3 { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr; }
+    .gallery img { height: 260px; }
+    .split { grid-template-columns: 1fr; gap: 20px; }
+    .nav-links { gap: 0; }
+    .nav-links a { padding: 10px 8px; font-size: 13px; }
+  }
+  @media (max-width: 520px) {
+    .nav-links a { padding: 8px 6px; }
+    section { padding: 44px 0; }
+    .hero { min-height: 74vh; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="brand">Optik Blickpunkt <span class="demo-pill">Muster-Demo</span></div>
+    <div class="nav-links">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#auswahl">Brillen-Auswahl</a>
+      <a href="#zeiten">Oeffnungszeiten</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" aria-label="Willkommen">
+  <img src="assets/hero.png" alt="Aussenansicht von Optik Blickpunkt am Abend">
+  <div class="container">
+    <h1>Ihre Augen im Fokus - Sehtest, Brillen und Kontaktlinsen</h1>
+    <p>Wir messen Ihre Werte sorgfaeltig aus und beraten Sie ruhig und ehrlich. Kommen Sie vorbei - oder schreiben Sie uns direkt per WhatsApp.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="https://wa.me/4926317654321?text=Hallo%20Optik%20Blickpunkt%2C%20ich%20moechte%20einen%20Sehtest%20Termin%20anfragen." target="_blank" rel="noopener">WhatsApp schreiben</a>
+      <a class="btn ghost" href="#leistungen">Leistungen ansehen</a>
+    </div>
+  </div>
+</section>
+
+<section id="leistungen">
+  <div class="container">
+    <p class="sec-label">Unsere Leistungen</p>
+    <h2>Gute Sicht beginnt mit einer guten Beratung</h2>
+    <div class="grid3">
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+        <h3>Sehtest und Messung</h3>
+        <p>Terminvereinbarung ist einfach: kurzer Anruf, WhatsApp oder direkt im Laden. Die Messung dauert rund 30 Minuten.</p>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="12" r="3.5"/><circle cx="18.5" cy="12" r="3.5"/><path d="M9 12h6"/></svg>
+        <h3>Brillen-Auswahl</h3>
+        <p>Ueber 300 Fassungen in allen Preislagen - vom Klassiker bis zur Designer-Brille. Anpassung und Einarbeitung inklusive.</p>
+      </div>
+      <div class="card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13c2.5-2.5 5-3.5 7-3.5S18.5 10.5 21 13"/><path d="M3 13v2"/><path d="M21 13v2"/><path d="M6 15h2"/><path d="M16 15h2"/><path d="M12 9.5V8"/><circle cx="12" cy="6.5" r="1.5"/></svg>
+        <h3>Kontaktlinsen</h3>
+        <p>Anpassung, Einweisung und regulaere Kontrolle - damit die Linse sitzt und Ihre Augen gesund bleiben.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="auswahl" style="background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <p class="sec-label">Vor Ort</p>
+    <h2>So sieht es bei uns aus</h2>
+    <div class="gallery">
+      <figure><img src="assets/interior.png" alt="Verkaufsraum mit Brillen-Auslage"><figcaption>Unser Ausstellungsraum</figcaption></figure>
+      <figure><img src="assets/hero.png" alt="Das Geschaeft in der Bahnhofstrasse bei Abendlicht"><figcaption>Das Geschaeft in der Bahnhofstrasse</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="zeiten">
+  <div class="container split">
+    <div>
+      <p class="sec-label">Vor Ort</p>
+      <h2>Oeffnungszeiten</h2>
+      <ul class="hours">
+        <li><span class="day">Montag - Freitag</span><span>9:00 - 18:00</span></li>
+        <li><span class="day">Samstag</span><span>9:00 - 14:00</span></li>
+        <li><span class="day">Sonntag</span><span>Geschlossen</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sec-label">Kontakt</p>
+      <h2>So erreichen Sie uns</h2>
+      <ul class="contact-list">
+        <li>Optik Blickpunkt, Bahnhofstrasse 1, 56626 Andernach</li>
+        <li>Telefon: 02631-7654321</li>
+        <li>E-Mail: hallo@optik-blickpunkt.example</li>
+      </ul>
+      <div class="map-box" aria-label="Karte mit Standort">
+        <div><strong>Hier finden Sie uns</strong>Bahnhofstrasse 1, 56626 Andernach - die Kartenansicht wird bei der echten Website eingebunden.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-band" aria-label="Zitat">
+  <div class="container">
+    <blockquote>"Hier hat sich meine Tochter zum ersten Mal eine Brille ausgesucht - die Beratung war geduldig, und die Brille sitzt perfekt."</blockquote>
+    <cite>- Julia Berger, Kundin seit 2021</cite>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="container">
+    <div>Optik Blickpunkt - Bahnhofstrasse 1, 56626 Andernach - 02631-7654321</div>
+    <div><a href="#">Impressum</a> / <a href="#">Datenschutz</a> (Texte werden mitgeliefert)</div>
+    <div style="font-size:12px;opacity:.65;margin-top:4px">Muster-Demo - kein realer Betrieb. Erstellt mit dem Website-Paket von Erijon (149 EUR einmalig).</div>
+    <div style="font-size:12px;opacity:.65">Projektanfrage: <a href="mailto:misinierijon4@gmail.com">misinierijon4@gmail.com</a> oder 0178 3551225</div>
+  </div>
+</footer>
+</body>
+</html>
