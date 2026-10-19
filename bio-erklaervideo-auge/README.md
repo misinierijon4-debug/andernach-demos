@@ -5,7 +5,7 @@ Ein ruhiges, schlichtes Erklärvideo **ohne Ton** (5:52 min) zu den Themen *Aufb
 | Datei | Wofür |
 |---|---|
 | `erklaervideo_auge.mp4` | Saubere Version (1080p, 30 fps, stille Tonspur). Darunter kommt eure Aufnahme. |
-| `erklaervideo_auge_sprechhilfe.mp4` | Gleiches Video mit eingeblendetem Text zum Mitlesen beim Aufnehmen („Person A/B: …“ und „als Nächstes: …“) |
+| `erklaervideo_auge_sprechhilfe.mp4` | Gleiches Video mit eingeblendetem Text zum Mitlesen beim Aufnehmen („Person A/B …“ und kurz vorher „gleich: Person B“) |
 | `sprechertext.md` | Sprechertext mit Zeitmarken, aufgeteilt auf Person A und B |
 | `sprechertext.srt` | Gleicher Text als Untertitel-Datei (z. B. für CapCut, iMovie, VLC) |
 | `erklaervideo_auge_ki_stimme.mp4` | Hörprobe mit Computerstimmen (Piper TTS: Person A = Thorsten, Person B = Kerstin). Nur zum Anhören, wie Tempo und Aufteilung wirken, nicht als Abgabe gedacht. |
