@@ -8,6 +8,7 @@ Ein ruhiges, schlichtes Erklärvideo **ohne Ton** (5:52 min) zu den Themen *Aufb
 | `erklaervideo_auge_sprechhilfe.mp4` | Gleiches Video mit eingeblendetem Text zum Mitlesen beim Aufnehmen („Person A/B: …“ und „als Nächstes: …“) |
 | `sprechertext.md` | Sprechertext mit Zeitmarken, aufgeteilt auf Person A und B |
 | `sprechertext.srt` | Gleicher Text als Untertitel-Datei (z. B. für CapCut, iMovie, VLC) |
+| `erklaervideo_auge_ki_stimme.mp4` | Hörprobe mit Computerstimmen (Piper TTS: Person A = Thorsten, Person B = Kerstin). Nur zum Anhören, wie Tempo und Aufteilung wirken, nicht als Abgabe gedacht. |
 
 ## Ablauf
 
@@ -32,5 +33,7 @@ npm i
 npm run dev                # Vorschau im Remotion Studio
 bash scripts/build.sh      # rendert beide MP4s + Sprechertexte (braucht ffmpeg)
 ```
+
+Die Hörprobe entsteht mit `scripts/lines-json.mjs` (Satz-Zeitpunkte) und `scripts/ki-stimme.py` (Piper-Stimmen, siehe Kopf der Datei).
 
 Quellen der Inhalte: Biologie heute – Erweiterte Ausgabe SII (2011), Biosphäre Neurobiologie SII (2016) sowie die Unterrichtsmaterialien M1/M2.
