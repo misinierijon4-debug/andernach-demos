@@ -6,10 +6,10 @@
   const WORDS_PER_SECOND = 2.5; // normales Vorlesetempo
   const GAP = 0.7;              // Pause zwischen zwei Sätzen
   const LEAD = 1.0;             // Vorlauf am Szenenanfang
-  const TAIL = 1.4;             // Nachlauf am Szenenende
+  const TAIL = 1.1;             // Nachlauf am Szenenende
 
   const SCENES = [
-    { id: 'intro', title: 'Intro', lead: 1.6, lines: [
+    { id: 'intro', title: 'Intro', lead: 1.2, lines: [
       ['A', 'Hallo! In diesem Video erklären wir euch das Sinnesorgan Auge.'],
       ['B', 'Über die Hälfte aller Sinnesrezeptoren unseres Körpers sitzt in den Augen. Sehen ist also unser wichtigster Sinn.'],
       ['A', 'Zuerst schauen wir uns den Aufbau von Auge und Netzhaut an. Danach klären wir, wie aus Licht ein elektrisches Signal wird.'],
@@ -77,9 +77,8 @@
       ['A', 'Fassen wir die Kaskade bei Licht noch einmal zusammen.'],
       ['B', 'Licht aktiviert Rhodopsin. Rhodopsin aktiviert Transducin. Transducin aktiviert das Enzym, und das Enzym baut cGMP ab.'],
       ['A', 'Die Natrium-Kanäle schließen sich, die Zelle hyperpolarisiert, es wird kein Glutamat mehr ausgeschüttet – und die Hemmung der Bipolarzelle fällt weg.'],
-      ['B', 'Übrigens: Ein einziges aktiviertes Rhodopsin aktiviert viele Transducin-Moleküle. So wird schon ein schwaches Lichtsignal stark verstärkt.'],
     ]},
-    { id: 'outro', title: 'Outro', tail: 3.0, lines: [
+    { id: 'outro', title: 'Outro', tail: 2.2, lines: [
       ['A', 'Das war unser Erklärvideo zum Sinnesorgan Auge.'],
       ['B', 'Danke fürs Zuschauen!'],
     ]},

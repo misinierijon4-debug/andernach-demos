@@ -1,199 +1,195 @@
 1
-00:00:01,600 --> 00:00:06,200
+00:00:01,200 --> 00:00:05,800
 Person A: Hallo! In diesem Video erklären wir euch das Sinnesorgan Auge.
 
 2
-00:00:06,300 --> 00:00:13,700
+00:00:05,900 --> 00:00:13,300
 Person B: Über die Hälfte aller Sinnesrezeptoren unseres Körpers sitzt in den Augen. Sehen ist also unser wichtigster Sinn.
 
 3
-00:00:13,800 --> 00:00:23,400
+00:00:13,400 --> 00:00:23,000
 Person A: Zuerst schauen wir uns den Aufbau von Auge und Netzhaut an. Danach klären wir, wie aus Licht ein elektrisches Signal wird.
 
 4
-00:00:24,600 --> 00:00:32,400
+00:00:23,900 --> 00:00:31,700
 Person B: Hier seht ihr das Auge im Querschnitt. Das Licht kommt von links. Ganz vorne liegt die durchsichtige Hornhaut.
 
 5
-00:00:32,500 --> 00:00:39,500
+00:00:31,800 --> 00:00:38,800
 Person A: Dahinter liegen die Iris mit der Pupille, also der Öffnung in der Mitte, und die Linse.
 
 6
-00:00:39,600 --> 00:00:42,200
+00:00:38,900 --> 00:00:41,500
 Person B: Den Innenraum füllt der Glaskörper.
 
 7
-00:00:42,300 --> 00:00:49,700
+00:00:41,600 --> 00:00:49,000
 Person A: Die innerste Schicht ist die Netzhaut, auch Retina genannt. Sie kleidet etwa 75 Prozent des Augapfels aus.
 
 8
-00:00:49,800 --> 00:00:57,800
+00:00:49,100 --> 00:00:57,100
 Person B: Darunter liegt die Aderhaut mit ihren Blutgefäßen. Über den Sehnerv verlassen die Signale das Auge Richtung Gehirn.
 
 9
-00:00:59,000 --> 00:01:03,200
+00:00:58,000 --> 00:01:02,200
 Person A: Verfolgen wir jetzt den Weg des Lichts – den Strahlengang.
 
 10
-00:01:03,300 --> 00:01:08,700
+00:01:02,300 --> 00:01:07,700
 Person B: Das Licht fällt zuerst durch die Hornhaut und dann durch die Pupille.
 
 11
-00:01:08,800 --> 00:01:14,200
+00:01:07,800 --> 00:01:13,200
 Person A: Die Linse bricht das Licht, sodass es gebündelt durch den Glaskörper läuft.
 
 12
-00:01:14,300 --> 00:01:23,100
+00:01:13,300 --> 00:01:22,100
 Person B: Schließlich trifft es auf die Netzhaut. Erst hier, in den Fotorezeptoren, wird der Lichtreiz in ein elektrisches Signal umgewandelt.
 
 13
-00:01:24,300 --> 00:01:28,100
+00:01:23,000 --> 00:01:26,800
 Person A: Auf der Netzhaut gibt es zwei besondere Stellen.
 
 14
-00:01:28,200 --> 00:01:37,200
+00:01:26,900 --> 00:01:35,900
 Person B: Den gelben Fleck, auch Fovea genannt. Hier ist die Dichte der Zapfen besonders hoch – das ist der Bereich des schärfsten Sehens.
 
 15
-00:01:37,300 --> 00:01:46,700
+00:01:36,000 --> 00:01:45,400
 Person A: Und den blinden Fleck. Hier verlässt der Sehnerv das Auge. Dort gibt es keine Lichtsinneszellen, also sehen wir an dieser Stelle nichts.
 
 16
-00:01:46,800 --> 00:01:55,200
+00:01:45,500 --> 00:01:53,900
 Person B: Trotzdem bemerken wir keine Lücke, weil das Gehirn die fehlenden Bereiche mit den Informationen des anderen Auges ergänzt.
 
 17
-00:01:56,400 --> 00:02:01,800
+00:01:54,800 --> 00:02:00,200
 Person A: Jetzt zoomen wir in die Netzhaut hinein. Sie besteht aus mehreren Zellschichten.
 
 18
-00:02:01,900 --> 00:02:06,100
+00:02:00,300 --> 00:02:04,500
 Person B: Diese Schichten sind invers angeordnet, also scheinbar verkehrt herum.
 
 19
-00:02:06,200 --> 00:02:17,200
+00:02:04,600 --> 00:02:15,600
 Person A: Das Licht kommt vom Glaskörper und muss erst durch die Ganglienzellen und die Bipolarzellen hindurch. Erst dann erreicht es die Fotorezeptoren, also die Stäbchen und Zapfen.
 
 20
-00:02:17,300 --> 00:02:20,700
+00:02:15,700 --> 00:02:19,100
 Person B: Dahinter liegen die Pigmentzellen und die Aderhaut.
 
 21
-00:02:20,800 --> 00:02:30,600
+00:02:19,200 --> 00:02:29,000
 Person A: Das Signal läuft genau in die andere Richtung: vom Fotorezeptor über die Bipolarzelle zur Ganglienzelle. Die Fortsätze der Ganglienzellen bilden zusammen den Sehnerv.
 
 22
-00:02:30,700 --> 00:02:39,900
+00:02:29,100 --> 00:02:38,300
 Person B: Dazu kommen Horizontalzellen und amakrine Zellen. Sie sind seitlich verschaltet, sodass die Signale schon in der Netzhaut miteinander verrechnet werden.
 
 23
-00:02:41,100 --> 00:02:49,300
+00:02:39,200 --> 00:02:47,400
 Person B: Schauen wir uns die Fotorezeptoren genauer an. Davon besitzt der Mensch etwa 125 Millionen – es gibt Stäbchen und Zapfen.
 
 24
-00:02:49,400 --> 00:02:56,000
+00:02:47,500 --> 00:02:54,100
 Person A: Beide bestehen aus einem Außensegment und einem Innensegment, die durch eine kurze Zilie verbunden sind.
 
 25
-00:02:56,100 --> 00:03:03,500
+00:02:54,200 --> 00:03:01,600
 Person B: Das Innensegment enthält den Zellkern und die Zellorganellen. Über die synaptische Endigung werden die nachgeschalteten Zellen aktiviert.
 
 26
-00:03:03,600 --> 00:03:12,000
+00:03:01,700 --> 00:03:10,100
 Person A: Im Außensegment liegt ein Stapel aus Membranscheibchen, den Disks. In ihnen sitzen die Fotopigmente, die das Licht absorbieren.
 
 27
-00:03:13,200 --> 00:03:20,200
+00:03:11,000 --> 00:03:18,000
 Person B: Vergleichen wir die beiden. Gemeinsam haben sie den Grundaufbau: Außensegment, Zilie, Innensegment und Disks mit Fotopigment.
 
 28
-00:03:20,300 --> 00:03:28,500
+00:03:18,100 --> 00:03:26,300
 Person A: Ein Unterschied ist die Anzahl: Pro Netzhaut gibt es etwa 120 Millionen Stäbchen, aber nur etwa 6 Millionen Zapfen.
 
 29
-00:03:28,600 --> 00:03:40,800
+00:03:26,400 --> 00:03:38,600
 Person B: Stäbchen haben ein langes, zylindrisches Außensegment mit sehr vielen Disks. Daraus kann man schließen: Sie sind besonders lichtempfindlich – ideal für das Sehen in der Dämmerung, allerdings nur in Grautönen.
 
 30
-00:03:40,900 --> 00:03:52,100
+00:03:38,700 --> 00:03:49,900
 Person A: Zapfen haben ein kürzeres, kegelförmiges Außensegment. Sie brauchen mehr Licht, ermöglichen dafür aber Farbsehen und scharfes Sehen – deshalb sitzen sie so dicht im gelben Fleck.
 
 31
-00:03:53,300 --> 00:04:00,700
+00:03:50,800 --> 00:03:58,200
 Person A: Jetzt zur Signaltransduktion: Wie wird aus Licht ein elektrisches Signal? Wir erklären das am Beispiel eines Stäbchens.
 
 32
-00:04:00,800 --> 00:04:08,800
+00:03:58,300 --> 00:04:06,300
 Person B: Die wichtigsten Beteiligten sind das Sehpigment Rhodopsin, das Protein Transducin, ein Enzym und der sekundäre Botenstoff cGMP.
 
 33
-00:04:10,000 --> 00:04:14,600
+00:04:07,200 --> 00:04:11,800
 Person A: Beginnen wir in der Dunkelheit. Hier ist das Rhodopsin inaktiv.
 
 34
-00:04:14,700 --> 00:04:21,700
+00:04:11,900 --> 00:04:18,900
 Person B: Im Außensegment liegt viel cGMP vor. Dieser sekundäre Botenstoff hält die Natrium-Ionenkanäle in der Membran offen.
 
 35
-00:04:21,800 --> 00:04:30,400
+00:04:19,000 --> 00:04:27,600
 Person A: Natrium-Ionen strömen also ständig in die Zelle ein. Die Membran ist depolarisiert: Das Membranpotential liegt bei etwa minus 30 Millivolt.
 
 36
-00:04:30,500 --> 00:04:35,900
+00:04:27,700 --> 00:04:33,100
 Person B: Deshalb schüttet das Stäbchen an der Synapse ständig den Transmitter Glutamat aus.
 
 37
-00:04:36,000 --> 00:04:42,400
+00:04:33,200 --> 00:04:39,600
 Person A: Das Glutamat hemmt die nachgeschaltete Bipolarzelle. Im Dunkeln wird sie also dauerhaft gehemmt.
 
 38
-00:04:43,600 --> 00:04:49,800
+00:04:40,500 --> 00:04:46,700
 Person B: Jetzt fällt Licht auf das Stäbchen. Das Rhodopsin absorbiert ein Photon und wird aktiviert.
 
 39
-00:04:49,900 --> 00:04:54,100
+00:04:46,800 --> 00:04:51,000
 Person A: Das aktivierte Rhodopsin reagiert mit Transducin und aktiviert es.
 
 40
-00:04:54,200 --> 00:04:59,200
+00:04:51,100 --> 00:04:56,100
 Person B: Transducin aktiviert wiederum ein Enzym, das den sekundären Botenstoff cGMP spaltet.
 
 41
-00:04:59,300 --> 00:05:05,500
+00:04:56,200 --> 00:05:02,400
 Person A: Ohne cGMP schließen sich die Natrium-Kanäle. Es strömt kein Natrium mehr in die Zelle.
 
 42
-00:05:05,600 --> 00:05:11,000
+00:05:02,500 --> 00:05:07,900
 Person B: Die Membran wird hyperpolarisiert. Das Potential sinkt auf etwa minus 70 Millivolt.
 
 43
-00:05:11,100 --> 00:05:18,100
+00:05:08,000 --> 00:05:15,000
 Person A: Dadurch wird an der Synapse kein Glutamat mehr ausgeschüttet – und die Hemmung der Bipolarzelle fällt weg.
 
 44
-00:05:18,200 --> 00:05:25,400
+00:05:15,100 --> 00:05:22,300
 Person B: Diese Veränderung wird über die Bipolarzelle und die Ganglienzelle als Signal an den Sehnerv weitergegeben.
 
 45
-00:05:26,600 --> 00:05:30,800
+00:05:23,200 --> 00:05:27,400
 Person A: Fassen wir die Kaskade bei Licht noch einmal zusammen.
 
 46
-00:05:30,900 --> 00:05:37,900
+00:05:27,500 --> 00:05:34,500
 Person B: Licht aktiviert Rhodopsin. Rhodopsin aktiviert Transducin. Transducin aktiviert das Enzym, und das Enzym baut cGMP ab.
 
 47
-00:05:38,000 --> 00:05:46,600
+00:05:34,600 --> 00:05:43,800
 Person A: Die Natrium-Kanäle schließen sich, die Zelle hyperpolarisiert, es wird kein Glutamat mehr ausgeschüttet – und die Hemmung der Bipolarzelle fällt weg.
 
 48
-00:05:46,700 --> 00:05:54,300
-Person B: Übrigens: Ein einziges aktiviertes Rhodopsin aktiviert viele Transducin-Moleküle. So wird schon ein schwaches Lichtsignal stark verstärkt.
-
-49
-00:05:55,500 --> 00:05:58,900
+00:05:44,700 --> 00:05:48,100
 Person A: Das war unser Erklärvideo zum Sinnesorgan Auge.
 
-50
-00:05:59,000 --> 00:06:02,300
+49
+00:05:48,200 --> 00:05:51,500
 Person B: Danke fürs Zuschauen!

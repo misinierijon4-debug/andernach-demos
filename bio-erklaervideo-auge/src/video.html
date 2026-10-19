@@ -743,7 +743,6 @@ function buildSummary() {
   const [lx, lw] = r1[r1.length - 1], [fx, fw] = r2[0];
   const conn = E('path', { d: `M${lx + lw / 2},${280 + 130} L${lx + lw / 2},${470} L${fx + fw / 2},${470} L${fx + fw / 2},${514}`, fill: 'none', stroke: '#9AA3AF', 'stroke-width': 3, 'marker-end': 'url(#arr)' }, g);
   show(conn, 'summary:2');
-  show(pill(g, 960, 790, 'Verstärkung: 1 Rh*  →  viele T*', { size: 28, h: 64, fill: '#FFF4D6', stroke: '#F2C14E' }), 'summary:3+0.6');
 }
 
 function buildOutro() {
