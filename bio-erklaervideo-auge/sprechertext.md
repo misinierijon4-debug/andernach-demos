@@ -4,7 +4,7 @@ Videolänge: **5:52 min** · Person A: 392 Wörter · Person B: 363 Wörter
 
 **So nehmt ihr auf**
 
-- Für die Aufnahme nehmt ihr am besten `erklaervideo_auge_sprechhilfe.mp4`. Dort steht unten immer, wer gerade spricht und was. Danach legt ihr eure Tonspur unter `erklaervideo_auge.mp4` (ohne Text).
+- Für die Aufnahme nehmt ihr am besten `erklaervideo_auge_sprechhilfe.mp4`. Dort steht unten immer, wer gerade spricht und was, und kurz vorher, wer als Nächstes dran ist. Danach legt ihr eure Tonspur unter `erklaervideo_auge.mp4` (ohne Text).
 - Die Zeitmarken zeigen, wann ein Satz beginnt. Die Animationen sind auf ein ruhiges Vorlesetempo abgestimmt. Wenn ihr etwas schneller oder langsamer seid, ist das kein Problem, die Pausen fangen das ab.
 - Ihr könnt Sätze umformulieren, solange die Reihenfolge der Begriffe bleibt (die Einblendungen kommen in dieser Reihenfolge).
 
