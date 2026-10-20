@@ -1,0 +1,791 @@
+<!doctype html><html><head><meta charset=utf8><title>Ein alter Konflikt?</title><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap">
+<style>
+  /* Layout: Plakat mit Ursachen links und rechts, Grafik in der Mitte; auf Beamer und Laptop als feste Fläche (1920 × 1200) auf den Bildschirm skaliert, auf dem Handy zum Scrollen. Drei Vortragsbereiche: links, rechts, unten. */
+  :root {
+    --grund: #ECEBE6;
+    --papier: #F6F5F1;
+    --wasser: #D3DCDD;
+    --land: #E2E0D8;
+    --tinte: #16181B;
+    --grau: #5E6267;
+    --linie: #C6C5BD;
+    --sand: #B38A34;
+    --schiefer: #4D6A7C;
+    --rot: #8E1F2F;
+    --rot-weich: rgba(142, 31, 47, 0.14);
+    --auf-tinte: #F6F5F1;
+    --kopf: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --text: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --dauer: 900ms;
+    --kurve: cubic-bezier(.65, .05, .25, 1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --grund: #121416; --papier: #1A1D20; --wasser: #1E2A30; --land: #23272B;
+      --tinte: #E9E8E3; --grau: #9EA3A8; --linie: #343A40;
+      --sand: #D0A650; --schiefer: #8AA7B8; --rot: #E0566A; --rot-weich: rgba(224, 86, 106, 0.18);
+      --auf-tinte: #121416;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --grund: #121416; --papier: #1A1D20; --wasser: #1E2A30; --land: #23272B;
+    --tinte: #E9E8E3; --grau: #9EA3A8; --linie: #343A40;
+    --sand: #D0A650; --schiefer: #8AA7B8; --rot: #E0566A; --rot-weich: rgba(224, 86, 106, 0.18);
+    --auf-tinte: #121416;
+  }
+
+  body { background: var(--grund); color: var(--tinte); font-family: var(--text); font-size: 16px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+  .plakat {
+    box-sizing: border-box; max-width: 1600px; margin: 0 auto;
+    padding-inline: clamp(16px, 3vw, 48px); padding-block: clamp(14px, 2.4vh, 30px);
+    display: grid; gap: clamp(12px, 2vh, 22px);
+  }
+  button { font: inherit; color: inherit; }
+  button:focus-visible, .begriff:focus-visible { outline: 2px solid var(--rot); outline-offset: 3px; }
+  .klein { font-family: var(--kopf); font-size: 11.5px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; font-variation-settings: "wdth" 88; }
+
+  /* kopf */
+  .kopfzeile { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--grau); border-bottom: 3px solid var(--tinte); padding-bottom: 8px; }
+  .kopfzeile b { color: var(--tinte); }
+  .titelzeile { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 48px; align-items: end; }
+  h1 {
+    margin: 0; font-family: var(--kopf); font-weight: 800; text-transform: uppercase;
+    font-variation-settings: "wdth" 62; font-size: clamp(3.2rem, 9vw, 9.4rem); line-height: .8; letter-spacing: -.01em;
+  }
+  h1 .frage { color: var(--rot); }
+  .unterzeile { max-width: 27rem; padding-bottom: .35em; display: grid; gap: 12px; }
+  .unterzeile p { margin: 0; font-size: clamp(1.1rem, 1.5vw, 1.45rem); line-height: 1.25; text-wrap: balance; }
+  .rollen { display: flex; gap: 6px 14px; flex-wrap: wrap; color: var(--grau); }
+  .rolle { display: inline-flex; align-items: center; gap: 6px; }
+  .rolle::before { content: ""; width: 10px; height: 10px; background: currentColor; }
+  .rolle.grund::before { background: var(--tinte); }
+  .rolle.schaerfe::before { background: transparent; border: 2px solid var(--tinte); width: 6px; height: 6px; }
+  .rolle.anlass::before { background: var(--rot); border-radius: 50%; }
+
+  /* vortragsbereiche */
+  .zone { display: flex; align-items: center; gap: 4px 8px; flex-wrap: wrap; color: var(--grau); min-height: 20px; transition: color .3s; }
+  .zone::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--linie); transition: background .3s; }
+  .zone.aktiv { color: var(--tinte); }
+  .zone.aktiv::before { background: var(--rot); }
+  .zone input {
+    font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--tinte);
+    background: transparent; border: 0; border-radius: 0; border-bottom: 1.5px dotted var(--linie);
+    padding: 0 2px 1px 0; margin: 0; width: 14ch; field-sizing: content;
+  }
+  .zone input:placeholder-shown { min-width: 7ch; }
+  .zone input:not(:placeholder-shown):not(:focus) { border-bottom-color: transparent; }
+  .zone input::placeholder { color: color-mix(in srgb, var(--grau) 70%, var(--grund)); }
+  .zone input:focus { outline: none; border-bottom: 1.5px solid var(--rot); }
+
+  /* mitte */
+  .mitte {
+    position: relative; display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: clamp(18px, 3vw, 52px); align-items: stretch;
+  }
+  .spalte { display: grid; grid-template-rows: auto; grid-auto-rows: 1fr; gap: clamp(8px, 1.4vh, 16px); position: relative; z-index: 1; }
+  #verbinder { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+  #verbinder path { fill: none; stroke: var(--linie); stroke-width: 1.2; transition: stroke .4s; }
+  #verbinder path.an { stroke: var(--rot); stroke-width: 2; }
+  #verbinder circle { fill: var(--linie); transition: fill .4s; }
+  #verbinder circle.an { fill: var(--rot); }
+
+  .ursache {
+    appearance: none; text-align: left; cursor: pointer; width: 100%;
+    background: var(--papier); border: 0; border-top: 3px solid var(--tinte);
+    padding: 12px clamp(12px, 1.2vw, 16px) 14px;
+    display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-content: start;
+    transition: opacity .45s, background .35s, color .35s;
+  }
+  .ursache .nr { font-family: var(--kopf); font-weight: 800; font-variation-settings: "wdth" 62; font-size: clamp(2.2rem, 3.2vw, 3.2rem); line-height: .82; grid-row: span 4; }
+  .ursache .rolle { color: var(--grau); }
+  .ursache h2 { margin: .3em 0 .2em; font-family: var(--kopf); font-weight: 700; font-variation-settings: "wdth" 80; font-size: clamp(1.1rem, 1.55vw, 1.55rem); line-height: 1.02; text-wrap: balance; }
+  .ursache p { margin: 0; font-size: clamp(.9rem, 1vw, 1rem); line-height: 1.35; color: var(--grau); }
+  .ursache .kfolge { display: block; margin-top: .6em; font-family: var(--kopf); font-weight: 700; font-variation-settings: "wdth" 85; color: var(--rot); font-size: clamp(.88rem, .95vw, .98rem); line-height: 1.25; }
+  .ursache:hover { background: color-mix(in srgb, var(--papier) 70%, var(--linie)); }
+  .gewaehlt .ursache { opacity: .45; }
+  .gewaehlt .ursache[aria-pressed="true"] { opacity: 1; background: var(--tinte); color: var(--auf-tinte); border-top-color: var(--rot); }
+  .gewaehlt .ursache[aria-pressed="true"] p, .gewaehlt .ursache[aria-pressed="true"] .rolle { color: color-mix(in srgb, var(--auf-tinte) 72%, var(--tinte)); }
+  .gewaehlt .ursache[aria-pressed="true"] .nr { color: var(--rot); }
+  .gewaehlt .ursache[aria-pressed="true"] .kfolge { color: color-mix(in srgb, var(--rot) 55%, var(--auf-tinte)); }
+  .gewaehlt .ursache[aria-pressed="true"] .rolle.grund::before,
+  .gewaehlt .ursache[aria-pressed="true"] .rolle.schaerfe::before { background: var(--auf-tinte); border-color: var(--auf-tinte); }
+  .gewaehlt .ursache[aria-pressed="true"] .rolle.schaerfe::before { background: transparent; }
+
+  /* buehne */
+  .zentrum { position: relative; z-index: 1; display: grid; grid-template-rows: auto auto 1fr; gap: 8px; }
+  .buehne svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .punkt { transition: transform var(--dauer) var(--kurve), opacity .5s, fill .6s; }
+  .punkt.a { fill: var(--sand); } .punkt.b { fill: var(--schiefer); } .punkt.t { fill: var(--tinte); } .punkt.r { fill: var(--rot); }
+  .szene { opacity: 0; transition: opacity .5s; pointer-events: none; }
+  .szene.an { opacity: 1; transition: opacity .7s .25s; }
+  .zieh { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .szene.an .zieh { stroke-dashoffset: 0; transition: stroke-dashoffset 1.1s var(--kurve) .35s; }
+  .lab { font-family: var(--kopf); font-size: 13.5px; font-weight: 600; letter-spacing: .07em; fill: var(--grau); text-transform: uppercase; font-variation-settings: "wdth" 88; }
+  .lab.rot { fill: var(--rot); } .lab.dunkel { fill: var(--tinte); }
+  .txt { font-family: var(--text); font-size: 15px; fill: var(--tinte); }
+  #zeitleiste .txt { font-size: 13.5px; }
+  .kursiv { font-family: var(--text); font-style: italic; font-size: 15px; fill: var(--grau); }
+  .jahr { font-family: var(--kopf); font-size: 15.5px; font-weight: 800; fill: var(--tinte); font-variant-numeric: tabular-nums; } .jahr.rot { fill: var(--rot); }
+  .strich { stroke: var(--tinte); fill: none; stroke-width: 1.4; }
+  .strich.fein { stroke: var(--linie); } .strich.grau { stroke: var(--grau); stroke-width: 1; } .strich.rot { stroke: var(--rot); }
+  .flaeche { fill: var(--land); stroke: var(--linie); stroke-width: 1; }
+  .gekauft { fill: color-mix(in srgb, var(--schiefer) 22%, var(--land)); stroke: var(--schiefer); }
+  .linse { fill: var(--rot-weich); }
+  .umriss { fill: var(--land); stroke: var(--tinte); stroke-width: 1.2; stroke-linejoin: round; }
+  .see { fill: var(--wasser); stroke: none; }
+  .haelfte { transition: transform 1.1s var(--kurve) .3s; }
+  .szene.an .haelfte.l { transform: translateX(-14px); } .szene.an .haelfte.r { transform: translateX(14px); }
+  .puls { fill: none; stroke: var(--rot); stroke-width: 1.4; transform-box: fill-box; transform-origin: center; }
+  .szene.an .puls { animation: puls 2.4s ease-out infinite; }
+  .szene.an .puls.p2 { animation-delay: .8s; } .szene.an .puls.p3 { animation-delay: 1.6s; }
+  @keyframes puls { 0% { transform: scale(.4); opacity: 1; } 100% { transform: scale(2.4); opacity: 0; } }
+  .phase-a { fill: var(--linie); } .phase-b { fill: color-mix(in srgb, var(--rot) 40%, var(--grund)); } .phase-c { fill: var(--rot); }
+  .massstab { color: var(--grau); display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; transition: opacity .4s; }
+  .massstab span { display: inline-flex; align-items: center; gap: 6px; }
+  .massstab i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  /* lupe */
+  .lupe { position: relative; border-top: 3px solid var(--tinte); padding-top: 12px; min-height: 15rem; }
+  .lupe > * { transition: opacity .4s, transform .55s var(--kurve); }
+  .lupe.raus > * { opacity: 0; transform: translateY(8px); }
+  .lupe.rein > * { opacity: 0; transform: translateY(14px); transition: none; }
+  .lupe > :nth-child(2) { transition-delay: .06s; } .lupe > :nth-child(3) { transition-delay: .12s; } .lupe > :nth-child(4) { transition-delay: .18s; } .lupe > :nth-child(5) { transition-delay: .24s; }
+  .brauen { color: var(--grau); display: flex; gap: 12px; flex-wrap: wrap; }
+  .brauen .nr { color: var(--rot); }
+  .brauen .wer { color: var(--tinte); }
+  .brauen .z { margin-left: auto; color: var(--rot); }
+  .lupe ul { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: .4em; }
+  .lupe li { position: relative; padding-left: 1.3em; font-size: clamp(.98rem, 1.1vw, 1.1rem); line-height: 1.42; }
+  .lupe li::before { content: ""; position: absolute; left: 0; top: .72em; width: .75em; border-top: 2px solid var(--tinte); }
+  .lupe .folge { margin-top: .7em; font-family: var(--kopf); font-weight: 700; font-variation-settings: "wdth" 85; color: var(--rot); font-size: clamp(1.05rem, 1.25vw, 1.25rem); display: flex; gap: .45em; }
+  .lupe .nein { font-family: var(--kopf); font-weight: 800; font-variation-settings: "wdth" 62; text-transform: uppercase; color: var(--rot); font-size: 3.6rem; line-height: .85; margin: 8px 0 2px; }
+  .sichten { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .sicht { background: var(--papier); padding: 10px 12px; font-size: .95rem; line-height: 1.38; font-style: italic; }
+  .sicht .klein { display: flex; align-items: center; gap: 6px; font-style: normal; margin-bottom: 4px; color: var(--grau); }
+  .sicht .klein i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .hinweiszeile { margin-top: 10px; color: var(--grau); font-size: .92rem; }
+
+  /* fachbegriffe */
+  .begriff { appearance: none; background: none; border: 0; padding: 0; cursor: help; font: inherit; color: inherit; border-bottom: 1.5px dotted var(--rot); }
+  .begriff:hover { color: var(--rot); }
+  #erklaerung {
+    position: fixed; z-index: 20; background: var(--tinte); color: var(--auf-tinte);
+    max-width: max(20rem, calc(24rem * var(--s, 1)));
+    padding: calc(12px * var(--s, 1) + 2px) calc(14px * var(--s, 1) + 2px);
+    font-family: var(--text); font-size: max(.92rem, calc(17px * var(--s, 1))); line-height: 1.4; box-shadow: 0 12px 30px -12px rgba(0,0,0,.5);
+  }
+  #erklaerung b { display: block; font-family: var(--kopf); font-weight: 700; font-variation-settings: "wdth" 85; font-size: 1.08em; margin-bottom: 3px; color: var(--auf-tinte); }
+
+  /* band */
+  .band { display: grid; grid-template-columns: 1fr 1fr minmax(0, .9fr); gap: 10px 14px; border-top: 3px solid var(--tinte); padding-top: 12px; align-items: stretch; }
+  .band .zone { grid-column: 1 / 3; }
+  .band .quelle { grid-column: 3; grid-row: 1 / span 2; }
+  .band button { appearance: none; cursor: pointer; text-align: left; background: var(--papier); border: 0; padding: 10px 14px; display: grid; gap: 2px; transition: background .3s, color .3s; }
+  .band button:hover { background: color-mix(in srgb, var(--papier) 70%, var(--linie)); }
+  .band button[aria-pressed="true"] { background: var(--tinte); color: var(--auf-tinte); }
+  .band button .klein { color: var(--grau); }
+  .band button[aria-pressed="true"] .klein { color: color-mix(in srgb, var(--auf-tinte) 70%, var(--tinte)); }
+  .band .v { font-family: var(--kopf); font-weight: 700; font-variation-settings: "wdth" 80; font-size: 1.3rem; line-height: 1.1; }
+  .band .v.rot { color: var(--rot); }
+  .quelle { font-size: .82rem; color: var(--grau); align-self: center; line-height: 1.4; margin: 0; }
+
+  @media (max-width: 1050px) {
+    html:not(.leinwand) .titelzeile { grid-template-columns: 1fr; }
+    html:not(.leinwand) .mitte { grid-template-columns: 1fr 1fr; }
+    html:not(.leinwand) .zentrum { grid-column: 1 / -1; order: -1; }
+    html:not(.leinwand) #verbinder { display: none; }
+    html:not(.leinwand) .band { grid-template-columns: 1fr 1fr; }
+    html:not(.leinwand) .band .zone, html:not(.leinwand) .band .quelle { grid-column: 1 / -1; grid-row: auto; }
+  }
+  @media (max-width: 620px) {
+    html:not(.leinwand) .mitte, html:not(.leinwand) .band, html:not(.leinwand) .sichten { grid-template-columns: 1fr; }
+  }
+
+  /* beamer und laptop: das ganze plakat auf einem bildschirm */
+  html.leinwand, html.leinwand body { height: 100%; overflow: hidden; }
+  html.leinwand .plakat {
+    position: fixed; left: 50%; top: 50%; width: 1920px; height: 1200px; max-width: none; margin: 0;
+    transform: translate(-50%, -50%) scale(var(--s, 1));
+    padding: 36px 60px 32px; gap: 18px; grid-template-rows: auto auto minmax(0, 1fr) auto;
+    background: var(--grund);
+  }
+  html.leinwand .klein { font-size: 13px; }
+  html.leinwand h1 { font-size: 134px; }
+  html.leinwand h1 br { display: none; }
+  html.leinwand .titelzeile { gap: 16px 56px; }
+  html.leinwand .unterzeile { max-width: 520px; }
+  html.leinwand .unterzeile p { font-size: 23px; }
+  html.leinwand .mitte { grid-template-columns: minmax(0, 1fr) minmax(0, 1.75fr) minmax(0, 1fr); gap: 48px; min-height: 0; }
+  html.leinwand .spalte { gap: 14px; min-height: 0; grid-auto-rows: minmax(0, 1fr); }
+  html.leinwand .ursache { padding: 14px 18px 16px; column-gap: 14px; }
+  html.leinwand .ursache .nr { font-size: 54px; }
+  html.leinwand .ursache h2 { font-size: 27px; }
+  html.leinwand .ursache p { font-size: 17.5px; }
+  html.leinwand .ursache .kfolge { font-size: 17px; }
+  html.leinwand .zentrum { grid-template-rows: minmax(0, 1fr) auto auto; gap: 10px; min-height: 0; }
+  html.leinwand .buehne { position: relative; min-height: 0; }
+  html.leinwand .buehne svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  html.leinwand .lupe { height: 340px; min-height: 0; box-sizing: border-box; overflow: hidden; padding-top: 14px; font-size: calc(20px * var(--tf, 1)); }
+  html.leinwand .lupe li { font-size: 1em; }
+  html.leinwand .lupe .folge { font-size: 1.1em; }
+  html.leinwand .lupe .nein { font-size: 2.9em; }
+  html.leinwand .sicht { font-size: .8em; padding: 12px 14px; }
+  html.leinwand .hinweiszeile { font-size: .8em; }
+  html.leinwand .band { padding-top: 12px; }
+  html.leinwand .band button { padding: 12px 16px; }
+  html.leinwand .band .v { font-size: 23px; }
+  html.leinwand .quelle { font-size: 14.5px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; animation: none !important; }
+  }
+</style>
+
+<div class="plakat">
+  <div class="kopfzeile klein"><span><b>Geschichte LK 13</b> · Nahostkonflikt</span><span>Ursachen 1900–1947</span></div>
+
+  <header class="titelzeile">
+    <h1>Ein alter <br>Konflikt<span class="frage">?</span></h1>
+    <div class="unterzeile">
+      <p>Ursachen für die angespannte Beziehung zwischen Israelis und Palästinensern</p>
+      <div class="rollen klein">
+        <span class="rolle grund">Grundursache</span>
+        <span class="rolle schaerfe">Verschärfung</span>
+        <span class="rolle anlass">Anlass &amp; Eskalation</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="mitte" id="mitte">
+    <svg id="verbinder" aria-hidden="true"></svg>
+    <div class="spalte links" id="links">
+      <div class="zone klein" data-zone="1"><input id="name-links" type="text" placeholder="Name" aria-label="Wer stellt die Ursachen 01 bis 03 vor?" autocomplete="off" spellcheck="false" maxlength="30"><span>· Ursachen 01–03</span></div>
+    </div>
+    <div class="zentrum">
+      <div class="buehne">
+      <svg id="buehne" viewBox="0 0 640 470" role="img" aria-label="Animierte Grafik zur gewählten Station">
+        <!-- szene 0: karte um 1900 -->
+        <g class="szene" data-s="0">
+          <g id="karte"></g>
+          <text class="kursiv" x="170" y="200" text-anchor="middle">Mittelmeer</text>
+          <text class="kursiv" x="404" y="138">Jordan</text>
+          <text class="lab dunkel" x="40" y="44">Palästina um 1900</text>
+          <text class="lab" x="40" y="63">Teil des Osmanischen Reichs</text>
+          <text class="lab rot" x="40" y="440">friedliches Zusammenleben</text>
+        </g>
+        <!-- szene 1: land -->
+        <g class="szene" data-s="1">
+          <text class="lab" x="50" y="88">Landkäufe ab den 1920er-Jahren</text>
+          <g id="parzellen"></g>
+          <path class="strich rot zieh" pathLength="1" d="M350 240 H440 M430 232 L440 240 L430 248"/>
+          <text class="lab rot" x="395" y="225" text-anchor="middle">verdrängt</text>
+          <g class="strich fein">
+            <rect x="462" y="250" width="28" height="130"/><rect x="494" y="208" width="34" height="172"/>
+            <rect x="532" y="268" width="26" height="112"/><rect x="562" y="228" width="28" height="152"/>
+          </g>
+          <text class="lab" x="526" y="405" text-anchor="middle">Stadt · Armut</text>
+          <text class="lab" x="92" y="379" text-anchor="middle">gekauft</text>
+        </g>
+        <!-- szene 2: nation -->
+        <g class="szene" data-s="2">
+          <path class="linse" d="M320 112.3 A150 150 0 0 1 320 377.7 A150 150 0 0 1 320 112.3 Z"/>
+          <circle class="strich zieh" pathLength="1" cx="250" cy="245" r="150" style="stroke: var(--sand)"/>
+          <circle class="strich zieh" pathLength="1" cx="390" cy="245" r="150" style="stroke: var(--schiefer)"/>
+          <text class="lab rot" x="320" y="250" text-anchor="middle">ein Land</text>
+          <text class="lab" x="160" y="72" text-anchor="middle">arabische Nationalbewegung</text>
+          <text class="lab" x="480" y="72" text-anchor="middle">Zionismus</text>
+          <text class="lab dunkel" x="320" y="441" text-anchor="middle">beide beanspruchen Palästina</text>
+        </g>
+        <!-- szene 3: versprechen -->
+        <g class="szene" data-s="3">
+          <path class="strich zieh" pathLength="1" d="M320 96 L172 296"/>
+          <path class="strich zieh" pathLength="1" d="M320 96 L468 296"/>
+          <rect x="306" y="68" width="28" height="28" fill="var(--tinte)"/>
+          <text class="lab dunkel" x="320" y="54" text-anchor="middle">Großbritannien</text>
+          <text class="txt" x="226" y="176" text-anchor="end">Zusage: arabisches</text>
+          <text class="txt" x="226" y="197" text-anchor="end">Königreich inkl. Palästina</text>
+          <text class="txt" x="414" y="176">1917: Balfour-Deklaration</text>
+          <text class="txt" x="414" y="197">„nationale Heimstätte“</text>
+          <text class="lab rot" x="320" y="446" text-anchor="middle">ein Land · zwei Versprechen</text>
+        </g>
+        <!-- szene 4: getrennte welten -->
+        <g class="szene" data-s="4">
+          <path class="strich rot" d="M320 70 V420" style="stroke-dasharray: 6 6"/>
+          <text class="lab dunkel" x="170" y="100" text-anchor="middle">arabische Gesellschaft</text>
+          <text class="lab dunkel" x="470" y="100" text-anchor="middle">jüdische Gesellschaft</text>
+          <text class="lab" x="170" y="123" text-anchor="middle">eigene Institutionen</text>
+          <text class="lab" x="470" y="123" text-anchor="middle">eigene Institutionen</text>
+          <text class="txt" x="170" y="411" text-anchor="middle">Angst: abgehängt, fremdbestimmt</text>
+          <text class="txt" x="470" y="411" text-anchor="middle">Argument: Modernisierung</text>
+        </g>
+        <!-- szene 5: einwanderung -->
+        <g class="szene" data-s="5">
+          <rect class="flaeche" x="310" y="84" width="310" height="330"/>
+          <text class="lab" x="465" y="72" text-anchor="middle">Palästina</text>
+          <path class="strich zieh" pathLength="1" d="M300 84 V414" style="stroke-width: 4"/>
+          <text class="lab rot" x="300" y="441" text-anchor="middle">britische Quoten</text>
+          <text class="lab" x="30" y="150">ab 1933: Flucht vor</text>
+          <text class="lab" x="30" y="169">der NS-Verfolgung</text>
+          <path class="strich grau zieh" pathLength="1" d="M30 300 H270 M262 294 L270 300 L262 306"/>
+          <text class="txt" x="30" y="331">bis zu 100.000 illegal</text>
+        </g>
+        <!-- szene 6: gewalt -->
+        <g class="szene" data-s="6">
+          <path class="flaeche haelfte l" d="M120 90 L318 90 L300 150 L330 210 L300 270 L330 330 L310 400 L120 400 Z"/>
+          <path class="flaeche haelfte r" d="M338 90 L520 90 L520 400 L330 400 L350 330 L320 270 L350 210 L320 150 Z"/>
+          <path class="strich rot zieh" pathLength="1" d="M328 76 L310 150 L340 210 L310 270 L340 330 L320 414" style="stroke-width: 2"/>
+          <circle class="puls" cx="310" cy="150" r="12"/>
+          <circle class="puls p2" cx="310" cy="270" r="12"/>
+          <circle class="puls p3" cx="320" cy="400" r="12"/>
+          <text class="jahr rot" x="536" y="154">1929</text><text class="lab" x="536" y="171">Aufstände</text>
+          <text class="jahr rot" x="536" y="274">1936</text><text class="lab" x="536" y="291">Revolte</text>
+          <text class="jahr rot" x="536" y="394">1947</text><text class="lab" x="536" y="411">Kämpfe</text>
+          <text class="lab" x="210" y="72" text-anchor="middle">arabische Seite</text>
+          <text class="lab" x="430" y="72" text-anchor="middle">jüdische Seite</text>
+          <text class="lab rot" x="320" y="446" text-anchor="middle">Teilungspläne 1937 &amp; 1947 scheitern</text>
+        </g>
+        <!-- szene 7: chronologie -->
+        <g class="szene" data-s="7" id="zeitleiste"></g>
+
+        <g id="punkte"></g>
+      </svg>
+
+      </div>
+      <div class="massstab klein" id="massstab">
+        <span><i style="background: var(--sand)"></i>Araber</span>
+        <span><i style="background: var(--schiefer)"></i>Juden</span>
+        <span>1 Punkt ≈ 25.000 Menschen</span>
+      </div>
+      <div class="lupe" id="lupe" aria-live="polite"></div>
+    </div>
+    <div class="spalte rechts" id="rechts">
+      <div class="zone klein" data-zone="2"><input id="name-rechts" type="text" placeholder="Name" aria-label="Wer stellt die Ursachen 04 bis 06 vor?" autocomplete="off" spellcheck="false" maxlength="30"><span>· Ursachen 04–06</span></div>
+    </div>
+  </section>
+
+  <footer class="band">
+    <div class="zone klein" data-zone="0"><input id="name-rahmen" type="text" placeholder="Name" aria-label="Wer übernimmt Einstieg und Fazit?" autocomplete="off" spellcheck="false" maxlength="30"><span>· Einstieg &amp; Fazit</span></div>
+    <button type="button" id="knopf-start" aria-pressed="true"><span class="klein">Ausgangslage</span><span class="v">Um 1900: friedliches Zusammenleben</span></button>
+    <button type="button" id="knopf-fazit" aria-pressed="false"><span class="klein">Fazit</span><span class="v rot">Nein. Ein Konflikt des 20. Jahrhunderts</span></button>
+    <p class="quelle">Grundlage: Arbeitsblatt „Die Beziehungen zwischen Israelis und Palästinensern: Ein alter Konflikt?“ (Z. = Zeile). Begriffserklärungen: ergänzendes Fachwissen. Unterstrichene Begriffe antippen.</p>
+  </footer>
+</div>
+<div id="erklaerung" role="tooltip" hidden></div>
+
+<script>
+// fachbegriffe
+const BEGRIFFE = {
+  osman: ["Osmanisches Reich", "Türkisch-islamisches Großreich. Palästina gehörte rund 400 Jahre dazu (1516 bis 1917/18). Nach der Niederlage im Ersten Weltkrieg zerfiel es."],
+  jnf: ["Jüdischer Nationalfonds", "1901 gegründete zionistische Organisation (hebr. Keren Kajemet LeIsrael). Kaufte Land in Palästina, um dort jüdische Siedlungen aufzubauen."],
+  zion: ["Zionismus", "Jüdische Nationalbewegung, Ende des 19. Jahrhunderts entstanden (Theodor Herzl, Erster Zionistenkongress 1897 in Basel). Ziel: eine jüdische Heimstätte in Palästina."],
+  territorial: ["Territorialkonflikt", "Streit zwischen mehreren Gruppen um die Herrschaft über dasselbe Gebiet."],
+  mandat: ["Mandatsgebiet", "Gebiet, das der Völkerbund nach dem Ersten Weltkrieg einer Siegermacht zur Verwaltung übertrug. Palästina stand von 1920 bis 1948 unter britischem Mandat."],
+  mcmahon: ["Hussein-McMahon-Korrespondenz", "Briefwechsel 1915/16 zwischen dem britischen Hochkommissar in Ägypten, Henry McMahon, und Hussein, dem Scherifen von Mekka. Großbritannien stellte für einen Aufstand gegen die Osmanen ein arabisches Reich in Aussicht."],
+  balfour: ["Balfour-Deklaration", "Brief des britischen Außenministers Arthur Balfour vom 2. November 1917 an Lord Rothschild. Großbritannien befürwortet darin eine „nationale Heimstätte“ für das jüdische Volk in Palästina."],
+  quoten: ["Einwanderungsquoten", "Festgelegte Höchstzahlen für die jüdische Einwanderung. Mit dem Weißbuch von 1939 begrenzte Großbritannien sie stark."],
+  teilung37: ["Teilungsplan 1937", "Vorschlag der britischen Peel-Kommission: Palästina sollte in einen jüdischen und einen arabischen Staat geteilt werden, Jerusalem bliebe britisch."],
+  res181: ["UN-Resolution 181", "Teilungsplan der UN-Generalversammlung vom 29. November 1947: ein jüdischer und ein arabischer Staat, Jerusalem unter internationaler Verwaltung."],
+  anlass: ["Anlass und Ursache", "Die Ursache ist der tiefere Grund eines Konflikts. Der Anlass ist das Ereignis, an dem er ausbricht. 1929 war der Streit um die heiligen Stätten der Anlass, Land und Nation die Ursachen."],
+};
+const b = (key, text) => `<button type="button" class="begriff" data-b="${key}">${text}</button>`;
+
+const STATIONEN = [
+  { brauen: "Ausgangslage · um 1900", z: "Z. 1–2",
+    punkte: [`Palästina gehört zum ${b("osman", "Osmanischen Reich")}.`,
+             "Knapp <strong>500.000 Araber</strong> und ca. <strong>25.000 Juden</strong> leben dort friedlich zusammen. Jeder Punkt auf der Karte steht für 25.000 Menschen.",
+             "Wie wird daraus ein Konflikt, der bis heute andauert? Die sechs Ursachen links und rechts erklären es."] },
+  { nr: "01", rolle: "grund", titel: "Streit um Land", kurz: "Landkäufe verdrängen arabische Bauern in die Armut.", z: "Z. 2–12",
+    punkte: [`Ab den 1920er-Jahren kauft der ${b("jnf", "Jüdische Nationalfonds")} gezielt Land, um die jüdische Besiedlung voranzutreiben.`,
+             "Die neuen Eigentümer bewirtschaften es selbst. Die landlosen arabischen Bauern, die dort gearbeitet haben, werden nicht mehr gebraucht.",
+             "Sie verlieren ihre Lebensgrundlage, ziehen in die Städte und verarmen."],
+    folge: "Der Konflikt beginnt als sozialer Konflikt.",
+    sicht: ["Fremde kaufen das Land, auf dem wir arbeiten. Wir verlieren unsere Existenz.",
+            "Wir haben das Land rechtmäßig gekauft und bebauen es selbst. So entsteht eine jüdische Heimat."] },
+  { nr: "02", rolle: "grund", titel: "Zwei Nationen, ein Land", kurz: "Zionismus und arabischer Nationalismus wollen dasselbe Gebiet.", z: "Z. 4–5, 13–15, 33",
+    punkte: [`Die ${b("zion", "Zionisten")} wollen in Palästina die Grundlage für einen eigenen jüdischen Staat schaffen.`,
+             "Gleichzeitig wächst unter den Arabern ein immer stärkeres Nationalgefühl.",
+             "Beide Seiten beanspruchen Palästina für sich."],
+    folge: `Ein ${b("territorial", "Territorialkonflikt")} entsteht, der bis heute andauert.`,
+    sicht: ["Palästina ist arabisches Land. Wir wollen selbst über unsere Zukunft bestimmen.",
+            "Das jüdische Volk braucht einen eigenen Staat, und zwar in seiner historischen Heimat."] },
+  { nr: "03", rolle: "schaerfe", titel: "Widersprüchliche Versprechen", kurz: "Großbritannien verspricht Palästina beiden Seiten.", z: "Z. 16–25",
+    punkte: [`Nach dem Ersten Weltkrieg zerfällt das Osmanische Reich. 1920 wird Palästina britisches ${b("mandat", "Mandatsgebiet")}.`,
+             `Den Arabern hat Großbritannien ein arabisches Königreich versprochen, das Palästina einschließt (${b("mcmahon", "Hussein-McMahon-Korrespondenz")}).`,
+             `Den Zionisten sichert es 1917 in der ${b("balfour", "Balfour-Deklaration")} eine „nationale Heimstätte“ zu.`],
+    folge: "Beide Seiten fühlen sich im Recht.",
+    sicht: ["Großbritannien hat uns ein arabisches Königreich zugesagt. Die Balfour-Deklaration bricht dieses Versprechen.",
+            "Die Balfour-Deklaration gibt uns das Recht auf eine nationale Heimstätte in Palästina."] },
+  { nr: "04", rolle: "schaerfe", titel: "Getrennte Welten", kurz: "Ängste und eigene Institutionen spalten das Land.", z: "Z. 25–30",
+    punkte: ["Die jüdischen Einwanderer begründen ihre Anwesenheit damit, das Land zu modernisieren und die Wirtschaft zu beleben.",
+             "Viele Palästinenser fürchten, wirtschaftlich abgehängt und politisch fremdbestimmt zu werden.",
+             "Beide Gruppen bauen eigene Institutionen und Unternehmen auf."],
+    folge: "Zwei getrennte Gesellschaften entstehen.",
+    sicht: ["Die Einwanderer werden uns wirtschaftlich überholen und politisch beherrschen.",
+            "Wir bringen Modernisierung und wirtschaftlichen Aufschwung ins Land."] },
+  { nr: "05", rolle: "schaerfe", titel: "Flucht und Zwickmühle", kurz: "Die NS-Verfolgung lässt die Einwanderung sprunghaft steigen.", z: "Z. 35–36, 41–47",
+    punkte: ["Ab 1933 verfolgen die Nationalsozialisten die Juden. Die Einwanderung nach Palästina steigt sprunghaft.",
+             `Großbritannien will die arabischen Staaten im Krieg nicht an Deutschland verlieren und begrenzt die Einwanderung mit ${b("quoten", "Quoten")}.`,
+             "Trotzdem gelangen bis zu 100.000 Juden illegal ins Land."],
+    folge: "Die Mandatsmacht gerät immer mehr zwischen die Fronten.",
+    sicht: ["Die Einwanderung verändert das Land zu unseren Ungunsten. Sie muss aufhören.",
+            "Juden werden in Europa verfolgt. Sie brauchen einen sicheren Zufluchtsort."] },
+  { nr: "06", rolle: "anlass", titel: "Gewalt und gescheiterte Teilung", kurz: "Aufstände, Anschläge und zwei gescheiterte Teilungspläne.", z: "Z. 30–40, 48–56",
+    punkte: [`Ab 1929 Aufstände und Angriffe. Vordergründig geht es um die heiligen Stätten in Jerusalem: der ${b("anlass", "Anlass")}, nicht die Ursache.`,
+             "1936 arabische Revolte, nach dem Zweiten Weltkrieg Anschläge radikaler Zionisten auf britische Behörden.",
+             `Die arabische Seite lehnt beide Teilungspläne ab (${b("teilung37", "1937")}, ${b("res181", "1947 UN-Resolution 181")}). Den ersten billigen die Zionisten im Prinzip.`],
+    folge: "1947 kämpfen jüdische und arabische Milizen gegeneinander.",
+    sicht: ["Eine Teilung nimmt uns einen Teil unseres Landes. Wir lehnen sie ab.",
+            "Ein eigener Staat auf einem Teil des Landes ist besser als gar keiner."] },
+  { brauen: "Fazit · Chronologie 1901–1947", z: "Z. 11–15, 33–34", nein: true,
+    punkte: ["Der Konflikt ist <strong>nicht uralt</strong>. Um 1900 leben Araber und Juden friedlich zusammen.",
+             "<strong>Grundursachen</strong> sind der Streit um Land und zwei Nationalbewegungen, die dasselbe Gebiet wollen.",
+             "<strong>Verschärft</strong> wird er durch britische Doppelversprechen, getrennte Gesellschaften und die Einwanderung infolge der NS-Verfolgung.",
+             `Die heiligen Stätten sind 1929 der ${b("anlass", "Anlass")} für den offenen Ausbruch, nicht seine Ursache.`],
+    folge: "Als Beginn gilt das Jahr 1929." },
+];
+const ROLLEN = { grund: "Grundursache", schaerfe: "Verschärfung", anlass: "Anlass & Eskalation" };
+
+// vortragsbereiche: 0 = einstieg & fazit (unten), 1 = ursachen 01–03 (links), 2 = ursachen 04–06 (rechts)
+const zoneVon = (i) => (i === 0 || i === 7 ? 0 : i <= 3 ? 1 : 2);
+const NAMEN_FELDER = ["name-rahmen", "name-links", "name-rechts"];
+const NAMEN_SCHLUESSEL = "nahost-plakat-namen";
+let namen = ["", "", ""];
+try {
+  const g = JSON.parse(localStorage.getItem(NAMEN_SCHLUESSEL) || "null");
+  if (Array.isArray(g)) namen = [0, 1, 2].map((i) => (typeof g[i] === "string" ? g[i] : ""));
+} catch (e) {}
+const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const nurText = (html) => { const d = document.createElement("div"); d.innerHTML = html; return d.textContent; };
+
+const NS = "http://www.w3.org/2000/svg";
+const svg = (name, attrs, eltern) => {
+  const e = document.createElementNS(NS, name);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (eltern) eltern.appendChild(e);
+  return e;
+};
+
+// karte: vereinfachter umriss des britischen mandatsgebiets (breite, laenge)
+const P = (lat, lon) => [320 + (lon - 34.9) * 93.8, 240 + (31.4 - lat) * 110];
+const pfad = (pts) => "M" + pts.map(([la, lo]) => P(la, lo).map(v => v.toFixed(1)).join(" ")).join(" L") + " Z";
+const UMRISS = [[33.09,35.10],[33.10,35.30],[33.13,35.50],[33.28,35.57],[33.25,35.65],[33.05,35.62],[32.88,35.60],[32.82,35.65],[32.70,35.58],
+  [32.40,35.56],[32.10,35.53],[31.77,35.55],[31.50,35.48],[31.10,35.42],[30.60,35.20],[30.00,35.05],[29.55,34.97],[29.50,34.90],[30.30,34.55],
+  [30.90,34.40],[31.25,34.23],[31.35,34.30],[31.52,34.43],[31.67,34.55],[32.05,34.75],[32.35,34.86],[32.70,34.95],[32.82,34.98],[32.83,35.05],[32.92,35.07]];
+const TOTES_MEER = [[31.77,35.45],[31.75,35.55],[31.50,35.50],[31.10,35.44],[31.05,35.38],[31.45,35.40]];
+{
+  const g = document.getElementById("karte");
+  svg("path", { d: pfad(UMRISS), class: "umriss" }, g);
+  svg("path", { d: pfad(TOTES_MEER), class: "see" }, g);
+  const [gx, gy] = P(32.82, 35.59);
+  svg("ellipse", { cx: gx, cy: gy, rx: 4.5, ry: 8, class: "see" }, g);
+  const [jx, jy] = P(31.79, 35.27);
+  svg("path", { d: `M${jx + 8} ${jy + 4} L${jx + 58} ${jy + 22}`, class: "strich grau" }, g);
+  const t = svg("text", { x: jx + 62, y: jy + 27, class: "lab dunkel" }, g); t.textContent = "Jerusalem";
+}
+
+// 40 punkte: 0–18 araber (19 × 25.000), 19–39 juden (anfangs nur einer)
+const ANZAHL = 40, ARABER = 19;
+const punktEbene = document.getElementById("punkte");
+const punkte = [];
+for (let i = 0; i < ANZAHL; i++) {
+  const c = svg("circle", { cx: 0, cy: 0, r: 9, class: "punkt " + (i < ARABER ? "a" : "b") }, punktEbene);
+  c.style.transitionDelay = (i * 14) + "ms";
+  punkte.push(c);
+}
+// orte um 1900 (ungefaehre lage der staedte)
+const ORTE_ARABER = [[32.79,34.99],[32.93,35.08],[32.80,35.17],[32.70,35.30],[32.79,35.50],[32.96,35.50],[32.46,35.30],[32.22,35.26],[32.31,35.03],
+  [32.05,34.78],[31.93,34.87],[31.90,35.20],[31.74,35.12],[31.86,35.44],[31.53,35.10],[31.67,34.57],[31.50,34.47],[31.34,34.32],[31.25,34.79]].map(([a, o]) => P(a, o));
+const ORT_JUDEN = P(31.79, 35.27);
+
+function raster(n, cx, cy, spalten, abstand) {
+  const zeilen = Math.ceil(n / spalten), out = [];
+  for (let i = 0; i < n; i++) {
+    const r = Math.floor(i / spalten), s = i % spalten;
+    const inZeile = r === zeilen - 1 ? n - r * spalten : spalten;
+    out.push([cx + (s - (inZeile - 1) / 2) * abstand, cy + (r - (zeilen - 1) / 2) * abstand]);
+  }
+  return out;
+}
+const bereich = (von, bis) => Array.from({ length: bis - von }, (_, k) => von + k);
+
+const parzellen = [];
+{
+  const g = document.getElementById("parzellen");
+  for (let r = 0; r < 2; r++) for (let s = 0; s < 3; s++) {
+    const x = 50 + s * 95, y = 110 + r * 122, gekauft = s === 0;
+    svg("rect", { x, y, width: 85, height: 110, class: "flaeche" + (gekauft ? " gekauft" : "") }, g);
+    for (let l = 1; l < 7; l++) svg("path", { d: `M${x + 10} ${y + l * 15.5} H${x + 75}`, class: "strich fein" }, g);
+    parzellen.push([x + 42.5, y + 55]);
+  }
+}
+
+const JAHR_X = (j) => 50 + (j - 1897) / 53 * 540;
+const EREIGNISSE = [
+  [1901, "Jüdischer Nationalfonds", 200], [1917, "Balfour-Deklaration", 316],
+  [1920, "Britisches Mandat", 200], [1929, "Aufstände: Beginn", 376],
+  [1933, "NS-Verfolgung", 140], [1936, "Arabische Revolte", 316],
+  [1937, "Teilungsplan London", 200, "start"], [1947, "UN-Teilungsplan", 376],
+];
+{
+  const g = document.getElementById("zeitleiste"), y = 260;
+  svg("rect", { x: JAHR_X(1897), y: y - 3, width: JAHR_X(1920) - JAHR_X(1897) - 2, height: 6, class: "phase-a" }, g);
+  svg("rect", { x: JAHR_X(1920), y: y - 3, width: JAHR_X(1929) - JAHR_X(1920) - 2, height: 6, class: "phase-b" }, g);
+  svg("rect", { x: JAHR_X(1929), y: y - 3, width: JAHR_X(1950) - JAHR_X(1929), height: 6, class: "phase-c" }, g);
+  for (let j = 1900; j <= 1950; j += 10) {
+    const t = svg("text", { x: JAHR_X(j), y: 291, class: "lab", "text-anchor": "middle", style: "font-size:11.5px" }, g);
+    t.textContent = j;
+  }
+  EREIGNISSE.forEach(([jahr, text, ly, anker = "middle"]) => {
+    const x = JAHR_X(jahr), oben = ly < y, rot = jahr >= 1929, tx = anker === "start" ? x - 6 : x;
+    svg("path", { d: `M${x} ${oben ? y - 10 : y + 10} V${oben ? ly + 6 : ly - 18}`, class: "strich grau zieh", pathLength: 1 }, g);
+    const tj = svg("text", { x: tx, y: oben ? ly - 17 : ly, class: "jahr" + (rot ? " rot" : ""), "text-anchor": anker }, g);
+    tj.textContent = jahr;
+    const tt = svg("text", { x: tx, y: oben ? ly : ly + 17, class: "txt", "text-anchor": anker }, g);
+    tt.textContent = text;
+  });
+  [["friedlich", 1897, 1920], ["erste Spannungen", 1920, 1929], ["offener Konflikt", 1929, 1950]].forEach(([n, a, bis], i) => {
+    const t = svg("text", { x: (JAHR_X(a) + JAHR_X(bis)) / 2, y: 446, class: "lab" + (i ? " rot" : ""), "text-anchor": "middle", style: "font-size:12px" }, g);
+    t.textContent = n;
+  });
+}
+
+// anordnung je station: [x, y, sichtbar, farbe?, groesse?]
+function anordnung(s) {
+  const pos = Array.from({ length: ANZAHL }, (_, i) => [i < ARABER ? 20 : 620, 240, 0]);
+  const setze = (ids, orte, extra = {}) => ids.forEach((id, k) => { pos[id] = [orte[k][0], orte[k][1], 1, extra.farbe, extra.gr]; });
+  const A = bereich(0, ARABER);
+  switch (s) {
+    case 0:
+      setze(A, ORTE_ARABER, { gr: .7 });
+      setze([ARABER], [ORT_JUDEN], { gr: .7 }); break;
+    case 1: {
+      setze(bereich(19, 23), [parzellen[0], parzellen[3]].flatMap(([x, y]) => [[x - 16, y], [x + 16, y]]));
+      setze(bereich(0, 8), [1, 2, 4, 5].flatMap(p => [[parzellen[p][0] - 16, parzellen[p][1]], [parzellen[p][0] + 16, parzellen[p][1]]]));
+      setze(bereich(8, 19), raster(11, 526, 318, 4, 24)); break;
+    }
+    case 2: setze(A, raster(19, 168, 245, 4, 30)); setze(bereich(19, 27), raster(8, 472, 245, 2, 30)); break;
+    case 3: setze(A, raster(19, 172, 352, 5, 25)); setze(bereich(19, 27), raster(8, 468, 340, 4, 25)); break;
+    case 4: setze(A, raster(19, 170, 265, 4, 32)); setze(bereich(19, 29), raster(10, 470, 250, 4, 32)); break;
+    case 5:
+      setze(A, raster(19, 465, 320, 5, 26));
+      setze(bereich(19, 31), raster(12, 465, 170, 6, 26));
+      setze(bereich(31, 39), raster(8, 140, 250, 4, 34));
+      setze([39], [[330, 250]]); break;
+    case 6: setze(A, raster(19, 200, 250, 4, 32)); setze(bereich(19, 31), raster(12, 432, 250, 3, 32)); break;
+    case 7: EREIGNISSE.forEach(([jahr], k) => { pos[k] = [JAHR_X(jahr), 260, 1, jahr >= 1929 ? "r" : "t", 0.7]; }); break;
+  }
+  return pos;
+}
+
+// ursachen-leisten
+const karten = [];
+for (let i = 1; i <= 6; i++) {
+  const st = STATIONEN[i];
+  const k = document.createElement("button");
+  k.type = "button"; k.className = "ursache"; k.id = "ursache-" + i;
+  k.setAttribute("aria-pressed", "false");
+  k.innerHTML = `<span class="nr">${st.nr}</span><span class="rolle ${st.rolle} klein">${ROLLEN[st.rolle]}</span><h2>${st.titel}</h2><p>${st.kurz}</p><span class="kfolge">→ ${esc(nurText(st.folge))}</span>`;
+  k.addEventListener("click", () => zeige(aktuell === i ? 0 : i));
+  document.getElementById(i <= 3 ? "links" : "rechts").appendChild(k);
+  karten[i] = k;
+}
+
+// skalierung: auf breiten bildschirmen passt das ganze plakat auf eine fläche
+let skala = 1;
+const istLeinwand = () => document.documentElement.classList.contains("leinwand");
+
+// verbindungslinien
+const mitte = document.getElementById("mitte");
+const verbinder = document.getElementById("verbinder");
+const buehneSvg = document.getElementById("buehne");
+const linien = [];
+function zeichneVerbinder() {
+  verbinder.innerHTML = "";
+  if (getComputedStyle(verbinder).display === "none") return;
+  const m = mitte.getBoundingClientRect();
+  const rel = (el) => {
+    const r = el.getBoundingClientRect();
+    return { l: (r.left - m.left) / skala, r: (r.right - m.left) / skala, t: (r.top - m.top) / skala, b: (r.bottom - m.top) / skala };
+  };
+  // tatsaechliche zeichenflaeche der grafik (viewBox 640 × 470, mittig eingepasst)
+  const box = rel(buehneSvg), bw = box.r - box.l, bh = box.b - box.t;
+  const f = Math.min(bw / 640, bh / 470), dw = 640 * f, dh = 470 * f;
+  const s = { l: box.l + (bw - dw) / 2, r: box.l + (bw + dw) / 2, t: box.t + (bh - dh) / 2, b: box.t + (bh + dh) / 2 };
+  const sy = (s.t + s.b) / 2;
+  for (let i = 1; i <= 6; i++) {
+    const k = rel(karten[i]), links = i <= 3;
+    const x1 = links ? k.r : k.l, y1 = k.t + 26;
+    const x2 = links ? box.l - 4 : box.r + 4, y2 = Math.min(Math.max(y1 + (sy - y1) * 0.25, s.t + 30), s.b - 30);
+    const knick = x1 + (x2 - x1) * 0.55;
+    const p = svg("path", { d: `M${x1} ${y1} H${knick} L${x2} ${y2}` }, verbinder);
+    const c = svg("circle", { cx: x2, cy: y2, r: 3 }, verbinder);
+    if (i === aktuell) { p.classList.add("an"); c.classList.add("an"); }
+    linien[i] = [p, c];
+  }
+}
+
+// fachbegriff-erklaerung
+const erkl = document.getElementById("erklaerung");
+let offenerBegriff = null;
+function zeigeBegriff(el) {
+  const [name, text] = BEGRIFFE[el.dataset.b];
+  erkl.innerHTML = `<b>${name}</b>${text}`;
+  erkl.hidden = false;
+  const r = el.getBoundingClientRect(), w = erkl.offsetWidth, h = erkl.offsetHeight;
+  let x = Math.min(Math.max(12, r.left), innerWidth - w - 12);
+  let y = r.bottom + 8;
+  if (y + h > innerHeight - 12) y = r.top - h - 8;
+  erkl.style.left = x + "px"; erkl.style.top = Math.max(12, y) + "px";
+  offenerBegriff = el;
+}
+function schliesseBegriff() { erkl.hidden = true; offenerBegriff = null; }
+document.addEventListener("click", (e) => {
+  const el = e.target.closest(".begriff");
+  if (el) { e.stopPropagation(); offenerBegriff === el ? schliesseBegriff() : zeigeBegriff(el); }
+  else if (!e.target.closest("#erklaerung")) schliesseBegriff();
+});
+addEventListener("scroll", schliesseBegriff, { passive: true });
+
+// ansicht wechseln
+const lupe = document.getElementById("lupe");
+let aktuell = -1, wechselTimer;
+
+function werHtml(i) {
+  const n = (namen[zoneVon(i)] || "").trim();
+  return n ? `<span class="wer">${esc(n)}</span>` : "";
+}
+function lupeHtml(i) {
+  const st = STATIONEN[i];
+  const brauen = st.nr ? `<span class="nr">Ursache ${st.nr}</span><span>${ROLLEN[st.rolle]}</span>` : `<span>${st.brauen}</span>`;
+  let h = `<div class="brauen klein">${brauen}${werHtml(i)}<span class="z">${st.z}</span></div>`;
+  if (st.nein) h += `<p class="nein">Nein.</p>`;
+  h += `<ul>${st.punkte.map(p => `<li>${p}</li>`).join("")}</ul>`;
+  if (st.folge) h += `<div class="folge"><span>→</span><span>${st.folge}</span></div>`;
+  if (st.sicht) h += `<div class="sichten">
+      <div class="sicht"><span class="klein"><i style="background: var(--sand)"></i>Arabische Sicht (sinngemäß)</span>${st.sicht[0]}</div>
+      <div class="sicht"><span class="klein"><i style="background: var(--schiefer)"></i>Zionistische Sicht (sinngemäß)</span>${st.sicht[1]}</div>
+    </div>`;
+  if (i === 0) h += `<p class="hinweiszeile">Tippe auf eine Ursache oder geh mit den Pfeiltasten der Reihe nach durch. Unterstrichene Begriffe werden beim Antippen erklärt.</p>`;
+  return h;
+}
+
+// auf der beamer-flaeche wird der text etwas kleiner, wenn er sonst nicht passt
+function passeAn() {
+  lupe.style.setProperty("--tf", "1");
+  if (!istLeinwand()) return;
+  const unten = () => { const l = lupe.lastElementChild; return l ? l.offsetTop + l.offsetHeight : 0; };
+  let tf = 1;
+  while (unten() > lupe.clientHeight - 2 && tf > 0.72) {
+    tf = Math.round((tf - 0.04) * 100) / 100;
+    lupe.style.setProperty("--tf", String(tf));
+  }
+}
+
+function markiereZone() {
+  const z = zoneVon(aktuell);
+  document.querySelectorAll(".zone").forEach((el) => el.classList.toggle("aktiv", +el.dataset.zone === z));
+}
+
+function zeige(i) {
+  if (i === aktuell) return;
+  const erstes = aktuell === -1;
+  aktuell = i;
+  schliesseBegriff();
+
+  document.querySelectorAll(".szene").forEach(g => g.classList.toggle("an", +g.dataset.s === i));
+  anordnung(i).forEach(([x, y, sicht, farbe, gr], k) => {
+    const p = punkte[k];
+    p.style.transform = `translate(${x}px, ${y}px) scale(${sicht ? (gr || 1) : 0})`;
+    p.style.opacity = sicht ? 1 : 0;
+    p.setAttribute("class", "punkt " + (farbe || (k < ARABER ? "a" : "b")));
+  });
+  document.getElementById("massstab").style.opacity = i === 7 ? 0 : 1;
+
+  mitte.classList.toggle("gewaehlt", i >= 1 && i <= 6);
+  for (let k = 1; k <= 6; k++) {
+    karten[k].setAttribute("aria-pressed", k === i ? "true" : "false");
+    if (linien[k]) linien[k].forEach(el => el.classList.toggle("an", k === i));
+  }
+  document.getElementById("knopf-start").setAttribute("aria-pressed", i === 0 ? "true" : "false");
+  document.getElementById("knopf-fazit").setAttribute("aria-pressed", i === 7 ? "true" : "false");
+  markiereZone();
+
+  clearTimeout(wechselTimer);
+  if (erstes) { lupe.innerHTML = lupeHtml(i); passeAn(); return; }
+  lupe.classList.add("raus");
+  wechselTimer = setTimeout(() => {
+    lupe.innerHTML = lupeHtml(i);
+    passeAn();
+    lupe.classList.remove("raus"); lupe.classList.add("rein");
+    void lupe.offsetWidth;
+    lupe.classList.remove("rein");
+    zeichneVerbinder();
+  }, 300);
+}
+
+// namen der vortragenden
+NAMEN_FELDER.forEach((id, z) => {
+  const feld = document.getElementById(id);
+  feld.value = namen[z];
+  feld.addEventListener("input", () => {
+    namen[z] = feld.value;
+    try { localStorage.setItem(NAMEN_SCHLUESSEL, JSON.stringify(namen)); } catch (e) {}
+    if (zoneVon(aktuell) === z) {
+      const alt = lupe.querySelector(".brauen .wer"), neu = werHtml(aktuell);
+      if (alt) alt.outerHTML = neu || "";
+      else if (neu) lupe.querySelector(".brauen .z").insertAdjacentHTML("beforebegin", neu);
+    }
+  });
+});
+
+// steuerung: tippen, pfeiltasten, presenter
+document.getElementById("knopf-start").addEventListener("click", () => zeige(0));
+document.getElementById("knopf-fazit").addEventListener("click", () => zeige(7));
+document.addEventListener("keydown", (e) => {
+  if (e.target.closest && e.target.closest("input")) {
+    if (e.key === "Enter" || e.key === "Escape") e.target.blur();
+    return;
+  }
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  const leinwand = istLeinwand();
+  const aufKnopf = e.target.closest && e.target.closest("button");
+  const vor = e.key === "ArrowRight" || (leinwand && (e.key === "ArrowDown" || e.key === "PageDown" || (e.key === " " && !aufKnopf)));
+  const zurueck = e.key === "ArrowLeft" || (leinwand && (e.key === "ArrowUp" || e.key === "PageUp"));
+  if (vor) { e.preventDefault(); zeige(Math.min(7, aktuell + 1)); }
+  else if (zurueck) { e.preventDefault(); zeige(Math.max(0, aktuell - 1)); }
+  else if (e.key === "Home" && leinwand) { e.preventDefault(); zeige(0); }
+  else if (e.key === "End" && leinwand) { e.preventDefault(); zeige(7); }
+  else if ((e.key === "f" || e.key === "F") && leinwand) {
+    try {
+      const v = document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+      if (v && v.catch) v.catch(() => {});
+    } catch (err) {}
+  }
+  else if (e.key === "Escape") schliesseBegriff();
+});
+
+function skaliere() {
+  const breit = innerWidth >= 960 && innerWidth / innerHeight >= 1.2;
+  document.documentElement.classList.toggle("leinwand", breit);
+  skala = breit ? Math.min(innerWidth / 1920, innerHeight / 1200) : 1;
+  document.documentElement.style.setProperty("--s", skala.toFixed(4));
+  schliesseBegriff();
+  passeAn();
+  zeichneVerbinder();
+}
+
+skaliere();
+zeige(0);
+zeichneVerbinder();
+addEventListener("resize", skaliere);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { passeAn(); zeichneVerbinder(); });
+if (window.ResizeObserver) new ResizeObserver(zeichneVerbinder).observe(mitte);
+</script>
+
+</body></html>
